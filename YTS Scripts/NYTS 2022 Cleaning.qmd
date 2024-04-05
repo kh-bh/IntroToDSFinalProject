@@ -1,0 +1,25 @@
+---
+title: "NYTS 2022 Cleaning"
+format: html
+editor: visual
+---
+```{r library}
+library(dplyr)
+library(ggplot2)
+library(readr)
+```
+
+```{r}
+setwd('../YTS Data')
+getwd()
+YTSData2022 <- read.csv("nyts2022.csv")
+```
+
+You can add options to executable code like this
+
+```{r explore}
+str(YTSData2022) 
+```
+```{r renamecol}
+
+```
