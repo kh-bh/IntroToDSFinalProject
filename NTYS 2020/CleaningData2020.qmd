@@ -1,29 +1,41 @@
+---
+title: "NYTS 2020 Cleaning - Monish"
+format: html
+editor: visual
+---
+
 ```{r library}
 library(dplyr)
 library(ggplot2)
 library(readr)
 ```
 
-```{r readdata}
+```{r setup}
 getwd()
-YTSData <- read.csv("nyts2020.csv")
+YTSData2022 <- read.csv("nyts2020.csv")
 ```
 
-```{r explore}
-
-```
-
-```{r rearange}
-# selecting columns I actually want
-YTSData <- YTSData %>% 
-  select("QN2", "QN3", "QN6", "QN9", "QN10", "QN17", "QN18", "QN19", "QN22", "QN25", "QN26",  "QN31", "QN32", "QN33", "QN82", "QN61", "QN63", "QN93", "QN102", "QN98")
-
-#renaming said columns
-
-YTSData %>% 
-  rename(
-    "Gender" = QN2 
-  )
-
-
+```{r renamecol}
+YTSData <- YTSData %>% rename(
+                              "Gender" = QN2,
+                              "Grade_of_Student" = QN3,
+                              "E_Cig_Ever_Used" = QN6,
+                              "E_Cig_Days_Used" = QN9,
+                              "E_Cig_Last_Used" = QN10,
+                              "E_Cig_Curiousity" = QN17,
+                              "E_Cig_Try" = QN18,
+                              "E_Cig_Try_Next_Year" = QN19,
+                              "Cigarette_Ever_Used" = QN22,
+                              "Cigarette_Days_Used" = QN25,
+                              "Cigarette_Last_Used" = QN26
+                              "Cigarette_Curiosity" = QN31,
+                              "Cigarette_Try" = QN32,
+                              "Cigarette_Try_Next_Year" = QN33,
+                              "The_Real_Cost" = QN82,
+                              "Any_Tobacco_Craving" = QN61,
+                              "Attempt_Quitting_Tobacco" = QN63,
+                              "Are_Tobacco_Products_Harmful" = QN93,
+                              "E_Cig_Promotions_Internet" = QN102,
+                              "Tobacco_Promotions_Internet" = QN89
+                              )
 ```
