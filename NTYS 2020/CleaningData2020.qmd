@@ -12,7 +12,7 @@ library(readr)
 
 ```{r setup}
 getwd()
-YTSData <- read.csv("nyts2020.csv")
+YTSData <- read.csv("OG_nyts2020.csv")
 ```
 
 ```{r renamecol}

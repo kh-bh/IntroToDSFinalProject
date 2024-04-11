@@ -1,0 +1,16 @@
+---
+title: "NYTS 2019 Cleaning - Monish"
+format: html
+editor: visual
+---
+
+```{r library}
+library(dplyr)
+library(ggplot2)
+library(readr)
+```
+
+```{r setup}
+getwd()
+YTSData <- read.csv("OG_nyts2019.csv")
+```
