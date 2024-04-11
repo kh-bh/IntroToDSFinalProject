@@ -10,69 +10,20 @@ YTSData <- read.csv("nyts2020.csv")
 ```
 
 ```{r explore}
-str(YTSData) 
+
 ```
 
-```{r rename}
+```{r rearange}
+# selecting columns I actually want
+YTSData <- YTSData %>% 
+  select("QN2", "QN3", "QN6", "QN9", "QN10", "QN17", "QN18", "QN19", "QN22", "QN25", "QN26",  "QN31", "QN32", "QN33", "QN82", "QN61", "QN63", "QN93", "QN102", "QN98")
 
-# #arrange in order from Year
-# YTSData <- arrange(YTSData, YEAR)
-# 
-# #Make all values neat
-# YTSData$Education <- trimws(YTSData$Education)
-# YTSData$Gender <- trimws(YTSData$Gender)
-# YTSData$LocationAbbr <- trimws(YTSData$LocationAbbr)
-# YTSData$LocationDesc <- trimws(YTSData$LocationDesc)
-# YTSData$Response <- trimws(YTSData$Response)
-# YTSData$GeoLocation <- trimws(YTSData$GeoLocation)
-# YTSData$MeasureDesc <- trimws(YTSData$MeasureDesc)
-# YTSData$TopicDesc <- trimws(YTSData$TopicDesc)
-# 
-# 
-# #Remove unrelated data
-# YTSData <- YTSData %>% select(-c(Data_Value_Unit,Data_Value_Type,Data_Value_Footnote_Symbol,Data_Value_Footnote, DataSource,StratificationID1,StratificationID2,StratificationID3,StratificationID4,TopicId,MeasureId,SubMeasureID,TopicTypeId)) 
-# YTSData <- YTSData %>% mutate(DataValueAsNumericPercent =  Data_Value / 100)
-# 
-# #Change naming convention to be the same throughout
-# YTSData <- YTSData %>% rename(Year = YEAR)
-# YTSData <- YTSData %>% rename(DataValue = Data_Value)
-# YTSData <- YTSData %>% rename(DataValueStdErr = Data_Value_Std_Err)
-# YTSData <- YTSData %>% rename(LowConfidenceLimit = Low_Confidence_Limit)
-# YTSData <- YTSData %>% rename(HighConfidenceLimit = High_Confidence_Limit)
-# YTSData <- YTSData %>% rename(SampleSize = Sample_Size)
-```
+#renaming said columns
 
-```{r analyzingrows}
-YTSData %>% group_by(Race)
-YTSData %>% group_by(Age)
-YTSData %>% group_by(TopicType)
-YTSData %>% group_by(Response)
-YTSData <- YTSData %>% select(-c(Race,Age,TopicType))
-```
+YTSData %>% 
+  rename(
+    "Gender" = QN2 
+  )
 
-```{r multipletables}
 
-YTSMiddleData <- YTSData %>% filter(Education == "Middle School")
-write_csv(YTSMiddleData, file = "YTSMiddleData.csv")
-YTSHighData <- YTSData %>% filter(Education == "High School")
-write_csv(YTSHighData, file = "YTSHighData.csv")
-
-YTSCessationData <- YTSData %>% filter(TopicDesc == "Cessation (Youth)")
-write_csv(YTSCessationData, file = "YTSCessationData.csv")
-YTSSmokelessTobaccoData <- YTSData %>% filter(TopicDesc == "Smokeless Tobacco Use (Youth)")
-write_csv(YTSSmokelessTobaccoData, file = "YTSSmokelessTobaccoData.csv")
-YTSCigaretteUseData <- YTSData %>% filter(TopicDesc == "Cigarette Use (Youth)")
-write_csv(YTSCigaretteUseData, file = "YTSCigaretteUseData.csv")
-```
-
-```{r education&Use}
-ggplot(YTSMiddleData, aes(TopicDesc)) + geom_bar() + scale_fill_viridis_d()
-ggplot(YTSHighData, aes(x=TopicDesc)) + geom_bar()
-```
-
-```{r cessationData}
-ggplot(YTSCessationData, aes(x=MeasureDesc)) + geom_bar() + scale_fill_viridis_d()
-```
-
-```{r}
 ```
