@@ -18,14 +18,14 @@ YTSData <- read.csv("OG_nyts2020.csv")
 ```{r renamecol}
 #first select columns to keep
 YTSData <- YTSData %>% 
-  select("QN2", "QN3", "QN6", "QN9", "QN10", "QN17", "QN18", "QN19", "QN22", "QN25", "QN26", "QN31", "QN32", "QN33", "QN82", "QN61", "QN63", "QN93", "QN102", "QN98")
+  select("QN2", "QN3", "QN6", "QN8", "QN9", "QN17", "QN18", "QN19", "QN22", "QN25", "QN26", "QN31", "QN32", "QN33", "QN82", "QN61", "QN63", "QN93", "QN102", "QN98")
 
 YTSData <- YTSData %>% rename(
   "Gender" = QN2,
   "Grade_of_Student" = QN3,
   "E_Cig_Ever_Used" = QN6,
-  "E_Cig_Days_Used" = QN9,
-  "E_Cig_Last_Used" = QN10,
+  "E_Cig_Days_Used" = QN8,
+  "E_Cig_Last_Used" = QN9,
   "E_Cig_Curiousity" = QN17,
   "E_Cig_Try" = QN18,
   "E_Cig_Try_Next_Year" = QN19,
@@ -74,19 +74,18 @@ YTSData$E_Cig_Ever_Used <- as.character(YTSData$E_Cig_Ever_Used)
 YTSData$E_Cig_Ever_Used[YTSData$E_Cig_Ever_Used == "1"] <- "Yes"
 YTSData$E_Cig_Ever_Used[YTSData$E_Cig_Ever_Used == "2"] <- "No"
 
-# QN9 Maybe change values in future they seem to be good
-#YTSData$E_Cig_Days_Used <- as.character()
+# QN8
+YTSData$E_Cig_Days_Used <- as.character(YTSData$E_Cig_Days_Used)
+YTSData$E_Cig_Days_Used[YTSData$E_Cig_Days_Used == "1"] == "1"
+YTSData$E_Cig_Days_Used[YTSData$E_Cig_Days_Used == "2"] == "5"
+YTSData$E_Cig_Days_Used[YTSData$E_Cig_Days_Used == "3"] == "15"
+YTSData$E_Cig_Days_Used[YTSData$E_Cig_Days_Used == "4"] == "35"
+YTSData$E_Cig_Days_Used[YTSData$E_Cig_Days_Used == "5"] == "75"
+YTSData$E_Cig_Days_Used[YTSData$E_Cig_Days_Used == "6"] == "100"
 
-# QN10
+# QN9
 YTSData$E_Cig_Last_Used <- as.character(YTSData$E_Cig_Last_Used)
-
-YTSData$E_Cig_Last_Used[YTSData$E_Cig_Last_Used == "1"] <- "Today"
-YTSData$E_Cig_Last_Used[YTSData$E_Cig_Last_Used == "2"] <- "Last 7 Days"
-YTSData$E_Cig_Last_Used[YTSData$E_Cig_Last_Used == "3"] <- "Last Month"
-YTSData$E_Cig_Last_Used[YTSData$E_Cig_Last_Used == "4"] <- "Last 6 Months"
-YTSData$E_Cig_Last_Used[YTSData$E_Cig_Last_Used == "5"] <- "Last Year"
-YTSData$E_Cig_Last_Used[YTSData$E_Cig_Last_Used == "6"] <- "1-4 Years Ago"
-YTSData$E_Cig_Last_Used[YTSData$E_Cig_Last_Used == "7"] <- "5 Years Ago"
+#leave the numberical values alone
 
 # QN17
 YTSData$E_Cig_Curiousity <- as.character(YTSData$E_Cig_Curiousity)
