@@ -121,7 +121,7 @@ YTSData$Cigarette_Ever_Used[YTSData$Cigarette_Ever_Used == "2"] <- "No"
 YTSData$Cigarette_Last_Used <- as.character(YTSData$Cigarette_Last_Used)
 YTSData$Cigarette_Last_Used[YTSData$Cigarette_Last_Used == "1"]<-"Today"
 YTSData$Cigarette_Last_Used[YTSData$Cigarette_Last_Used == "2"]<-"Last 7 Days"
-YTSData$Cigarette_Last_Usedd[YTSData$Cigarette_Last_Used == "3"]<-"Last Month"
+YTSData$Cigarette_Last_Used[YTSData$Cigarette_Last_Used == "3"]<-"Last Month"
 YTSData$Cigarette_Last_Used[YTSData$Cigarette_Last_Used == "4"]<-"Last 6 Months"
 YTSData$Cigarette_Last_Used[YTSData$Cigarette_Last_Used == "5"]<-"Last Year"
 YTSData$Cigarette_Last_Used[YTSData$Cigarette_Last_Used == "6"]<-"1-4 Years Ago"
