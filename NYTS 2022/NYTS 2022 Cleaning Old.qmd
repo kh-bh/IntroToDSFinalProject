@@ -1,0 +1,512 @@
+---
+title: "NYTS 2022 Cleaning - Bhoomika"
+format: html
+editor: visual
+---
+
+```{r library}
+library(dplyr)
+library(ggplot2)
+library(readr)
+```
+
+```{r setup}
+setwd('../NYTS 2022 Data')
+getwd()
+YTSData2022 <- read.csv("nyts2022.csv")
+```
+
+```{r explore}
+str(YTSData2022) 
+```
+
+```{r renamecol}
+YTSData2022 <- YTSData2022 %>% rename("Grade_of_Student" = QN3)
+YTSData2022 <- YTSData2022 %>% rename("E_Cig_Ever_used" = QN6)
+YTSData2022 <- YTSData2022 %>% rename("E_Cig_Days_Used" = QN9)
+YTSData2022 <- YTSData2022 %>% rename("E_Cig_Last_Used" = QN10)
+YTSData2022 <- YTSData2022 %>% rename("E_Cig_Thinking_Quitting" = QN26)
+YTSData2022 <- YTSData2022 %>% rename("E_Cig_Quit_Attempts" = QN27)
+YTSData2022 <- YTSData2022 %>% rename("E_Cig_Curiousity" = QN29)
+YTSData2022 <- YTSData2022 %>% rename("E_Cig_Try" = QN30)
+YTSData2022 <- YTSData2022 %>% rename("E_Cig_Try_Next_Year" = QN31)
+YTSData2022 <- YTSData2022 %>% rename("Cigarette_Ever_Used" = QN35)
+YTSData2022 <- YTSData2022 %>% rename("Cigarette_Days_Used" = QN38)
+YTSData2022 <- YTSData2022 %>% rename("Cigarette_Last_Used" = QN39)
+YTSData2022 <- YTSData2022 %>% rename("Cigarette_Thinking_Quitting" = QN45)
+YTSData2022 <- YTSData2022 %>% rename("Cigarette_Quit_Attempts" = QN46)
+YTSData2022 <- YTSData2022 %>% rename("Cigarette_Curiosity" = QN47)
+YTSData2022 <- YTSData2022 %>% rename("Cigarette_Try" = QN48)
+YTSData2022 <- YTSData2022 %>% rename("Chewing_Tobacco_Ever_Used" = QN62)
+YTSData2022 <- YTSData2022 %>% rename("Chewing_Tobacco_Days_Used" = QN64)
+YTSData2022 <- YTSData2022 %>% rename("Snus_Ever_Used" = QN77)
+YTSData2022 <- YTSData2022 %>% rename("Snus_Days_Used" = QN78)
+YTSData2022 <- YTSData2022 %>% rename("Dissolvable_Ever_Used" = QN79)
+YTSData2022 <- YTSData2022 %>% rename("Dissolvable_Days_Used" = QN80)
+YTSData2022 <- YTSData2022 %>% rename("Zyn_Ever_Used" = QN87)
+YTSData2022 <- YTSData2022 %>% rename("Zyn_Days_Used" = QN88)
+YTSData2022 <- YTSData2022 %>% rename("Any_Tobacco_Days_Used" = QN89)
+YTSData2022 <- YTSData2022 %>% rename("Any_Tobacco_Craving" = QN90)
+YTSData2022 <- YTSData2022 %>% rename("Are_Tobacco_Products_Harmful" = QN122)
+YTSData2022 <- YTSData2022 %>% rename("E_Cig_Promotions_Internet" = QN128)
+YTSData2022 <- YTSData2022 %>% rename("Tobacco_Promotions_Internet" = QN139)
+
+
+YTSData2022 <- YTSData2022 %>% select("newid", "Grade_of_Student", "E_Cig_Ever_used", "E_Cig_Days_Used", "E_Cig_Last_Used", "E_Cig_Thinking_Quitting","E_Cig_Quit_Attempts", "E_Cig_Curiousity", "E_Cig_Try", "E_Cig_Try_Next_Year", "Cigarette_Ever_Used", "Cigarette_Days_Used", "Cigarette_Last_Used", "Cigarette_Thinking_Quitting", "Cigarette_Quit_Attempts", "Cigarette_Curiosity", "Cigarette_Try", "Chewing_Tobacco_Ever_Used", "Chewing_Tobacco_Days_Used", "Snus_Ever_Used", "Snus_Days_Used", "Dissolvable_Ever_Used", "Dissolvable_Days_Used", "Zyn_Ever_Used", "Zyn_Days_Used", "Any_Tobacco_Days_Used", "Any_Tobacco_Craving", "Are_Tobacco_Products_Harmful", "E_Cig_Promotions_Internet", "Tobacco_Promotions_Internet")
+```
+
+```{r Duplicating and saving new dataset}
+YTSDataNumbers <- YTSData2022
+write.csv(YTSDataNumbers, file = "NYTSDataNumbers.csv")
+```
+
+```{r exploreAfterNameChange}
+str(YTSData2022) 
+```
+
+```{r ChangeValueNamesGrade}
+YTSData2022$Grade_of_Student <- 
+  as.character(YTSData2022$Grade_of_Student)
+
+YTSData2022$Grade_of_Student[YTSData2022$Grade_of_Student=="1"]<-"6th"
+YTSData2022$Grade_of_Student[YTSData2022$Grade_of_Student=="2"]<-"7th"
+YTSData2022$Grade_of_Student[YTSData2022$Grade_of_Student=="3"]<-"8th"
+YTSData2022$Grade_of_Student[YTSData2022$Grade_of_Student=="4"]<-"9th"
+YTSData2022$Grade_of_Student[YTSData2022$Grade_of_Student=="5"]<-"10th"
+YTSData2022$Grade_of_Student[YTSData2022$Grade_of_Student=="6"]<-"11th"
+YTSData2022$Grade_of_Student[YTSData2022$Grade_of_Student=="7"]<-"12th"
+YTSData2022$Grade_of_Student[YTSData2022$Grade_of_Student=="8"]<-"Unplaced"
+```
+
+```{r ChangeValueNamesYesNo}
+
+YTSData2022$E_Cig_Ever_used <- 
+  as.character(YTSData2022$E_Cig_Ever_used)
+
+YTSData2022$E_Cig_Ever_used[YTSData2022$E_Cig_Ever_used=="1"]<-"Yes"
+YTSData2022$E_Cig_Ever_used[YTSData2022$E_Cig_Ever_used=="2"]<-"No"
+
+
+YTSData2022$Cigarette_Ever_Used <- 
+  as.character(YTSData2022$Cigarette_Ever_Used)
+
+YTSData2022$Cigarette_Ever_Used[YTSData2022$Cigarette_Ever_Used=="1"]<-"Yes"
+YTSData2022$Cigarette_Ever_Used[YTSData2022$Cigarette_Ever_Used=="2"]<-"No"
+
+YTSData2022$Snus_Ever_Used <- 
+  as.character(YTSData2022$Snus_Ever_Used)
+YTSData2022$Snus_Ever_Used[YTSData2022$Snus_Ever_Used=="1"]<-"Yes"
+YTSData2022$Snus_Ever_Used[YTSData2022$Snus_Ever_Used=="2"]<-"No"
+
+
+YTSData2022$Dissolvable_Ever_Used <- 
+  as.character(YTSData2022$Dissolvable_Ever_Used)
+YTSData2022$Dissolvable_Ever_Used[YTSData2022$Dissolvable_Ever_Used=="1"]<-"Yes"
+YTSData2022$Dissolvable_Ever_Used[YTSData2022$Dissolvable_Ever_Used=="2"]<-"No"
+
+YTSData2022$Chewing_Tobacco_Ever_Used <-
+  as.character(YTSData2022$Chewing_Tobacco_Ever_Used)
+
+YTSData2022$Chewing_Tobacco_Ever_Used[YTSData2022$Chewing_Tobacco_Ever_Used=="1"]<-"Yes"
+YTSData2022$Chewing_Tobacco_Ever_Used[YTSData2022$Chewing_Tobacco_Ever_Used=="2"]<-"No"
+YTSData2022$Chewing_Tobacco_Ever_Used[YTSData2022$Chewing_Tobacco_Ever_Used=="3"]<-"Not Sure"
+
+
+YTSData2022$Zyn_Ever_Used <- 
+  as.character(YTSData2022$Zyn_Ever_Used)
+YTSData2022$Zyn_Ever_Used[YTSData2022$Zyn_Ever_Used=="1"]<-"Yes"
+YTSData2022$Zyn_Ever_Used[YTSData2022$Zyn_Ever_Used=="2"]<-"No"
+YTSData2022$Zyn_Ever_Used[YTSData2022$Zyn_Ever_Used=="3"]<-"Not Sure"
+```
+
+```{r ChangeValuesDaysUsedECig}
+
+YTSData2022$E_Cig_Days_Used <- 
+  as.character(YTSData2022$E_Cig_Days_Used)
+
+YTSData2022$E_Cig_Days_Used[YTSData2022$E_Cig_Days_Used=="0"]<-"Ever"
+YTSData2022$E_Cig_Days_Used[YTSData2022$E_Cig_Days_Used=="1"]<-"Current"
+YTSData2022$E_Cig_Days_Used[YTSData2022$E_Cig_Days_Used=="2"]<-"Current"
+YTSData2022$E_Cig_Days_Used[YTSData2022$E_Cig_Days_Used=="3"]<-"Current"
+YTSData2022$E_Cig_Days_Used[YTSData2022$E_Cig_Days_Used=="4"]<-"Current"
+YTSData2022$E_Cig_Days_Used[YTSData2022$E_Cig_Days_Used=="5"]<-"Current"
+YTSData2022$E_Cig_Days_Used[YTSData2022$E_Cig_Days_Used=="6"]<-"Current"
+YTSData2022$E_Cig_Days_Used[YTSData2022$E_Cig_Days_Used=="7"]<-"Current"
+YTSData2022$E_Cig_Days_Used[YTSData2022$E_Cig_Days_Used=="8"]<-"Current"
+YTSData2022$E_Cig_Days_Used[YTSData2022$E_Cig_Days_Used=="9"]<-"Current"
+YTSData2022$E_Cig_Days_Used[YTSData2022$E_Cig_Days_Used=="10"]<-"Current"
+YTSData2022$E_Cig_Days_Used[YTSData2022$E_Cig_Days_Used=="11"]<-"Current"
+YTSData2022$E_Cig_Days_Used[YTSData2022$E_Cig_Days_Used=="12"]<-"Current"
+YTSData2022$E_Cig_Days_Used[YTSData2022$E_Cig_Days_Used=="13"]<-"Current"
+YTSData2022$E_Cig_Days_Used[YTSData2022$E_Cig_Days_Used=="14"]<-"Current"
+YTSData2022$E_Cig_Days_Used[YTSData2022$E_Cig_Days_Used=="15"]<-"Current"
+YTSData2022$E_Cig_Days_Used[YTSData2022$E_Cig_Days_Used=="16"]<-"Current"
+YTSData2022$E_Cig_Days_Used[YTSData2022$E_Cig_Days_Used=="17"]<-"Current"
+YTSData2022$E_Cig_Days_Used[YTSData2022$E_Cig_Days_Used=="18"]<-"Current"
+YTSData2022$E_Cig_Days_Used[YTSData2022$E_Cig_Days_Used=="19"]<-"Current"
+YTSData2022$E_Cig_Days_Used[YTSData2022$E_Cig_Days_Used=="20"]<-"Current"
+YTSData2022$E_Cig_Days_Used[YTSData2022$E_Cig_Days_Used=="21"]<-"Frequent"
+YTSData2022$E_Cig_Days_Used[YTSData2022$E_Cig_Days_Used=="22"]<-"Frequent"
+YTSData2022$E_Cig_Days_Used[YTSData2022$E_Cig_Days_Used=="23"]<-"Frequent"
+YTSData2022$E_Cig_Days_Used[YTSData2022$E_Cig_Days_Used=="24"]<-"Frequent"
+YTSData2022$E_Cig_Days_Used[YTSData2022$E_Cig_Days_Used=="25"]<-"Frequent"
+YTSData2022$E_Cig_Days_Used[YTSData2022$E_Cig_Days_Used=="26"]<-"Frequent"
+YTSData2022$E_Cig_Days_Used[YTSData2022$E_Cig_Days_Used=="27"]<-"Frequent"
+YTSData2022$E_Cig_Days_Used[YTSData2022$E_Cig_Days_Used=="28"]<-"Frequent"
+YTSData2022$E_Cig_Days_Used[YTSData2022$E_Cig_Days_Used=="29"]<-"Frequent"
+YTSData2022$E_Cig_Days_Used[YTSData2022$E_Cig_Days_Used=="30"]<-"Frequent"
+```
+
+``` {r ChangeValuesDaysUsedCig}
+YTSData2022$Cigarette_Days_Used <- 
+  as.character(YTSData2022$Cigarette_Days_Used)
+
+YTSData2022$Cigarette_Days_Used[YTSData2022$Cigarette_Days_Used=="0"]<-"Ever"
+YTSData2022$Cigarette_Days_Used[YTSData2022$Cigarette_Days_Used=="1"]<-"Current"
+YTSData2022$Cigarette_Days_Used[YTSData2022$Cigarette_Days_Used=="2"]<-"Current"
+YTSData2022$Cigarette_Days_Used[YTSData2022$Cigarette_Days_Used=="3"]<-"Current"
+YTSData2022$Cigarette_Days_Used[YTSData2022$Cigarette_Days_Used=="4"]<-"Current"
+YTSData2022$Cigarette_Days_Used[YTSData2022$Cigarette_Days_Used=="5"]<-"Current"
+YTSData2022$Cigarette_Days_Used[YTSData2022$Cigarette_Days_Used=="6"]<-"Current"
+YTSData2022$Cigarette_Days_Used[YTSData2022$Cigarette_Days_Used=="7"]<-"Current"
+YTSData2022$Cigarette_Days_Used[YTSData2022$Cigarette_Days_Used=="8"]<-"Current"
+YTSData2022$Cigarette_Days_Used[YTSData2022$Cigarette_Days_Used=="9"]<-"Current"
+YTSData2022$Cigarette_Days_Used[YTSData2022$Cigarette_Days_Used=="10"]<-"Current"
+YTSData2022$Cigarette_Days_Used[YTSData2022$Cigarette_Days_Used=="11"]<-"Current"
+YTSData2022$Cigarette_Days_Used[YTSData2022$Cigarette_Days_Used=="12"]<-"Current"
+YTSData2022$Cigarette_Days_Used[YTSData2022$Cigarette_Days_Used=="13"]<-"Current"
+YTSData2022$Cigarette_Days_Used[YTSData2022$Cigarette_Days_Used=="14"]<-"Current"
+YTSData2022$Cigarette_Days_Used[YTSData2022$Cigarette_Days_Used=="15"]<-"Current"
+YTSData2022$Cigarette_Days_Used[YTSData2022$Cigarette_Days_Used=="16"]<-"Current"
+YTSData2022$Cigarette_Days_Used[YTSData2022$Cigarette_Days_Used=="17"]<-"Current"
+YTSData2022$Cigarette_Days_Used[YTSData2022$Cigarette_Days_Used=="18"]<-"Current"
+YTSData2022$Cigarette_Days_Used[YTSData2022$Cigarette_Days_Used=="19"]<-"Current"
+YTSData2022$Cigarette_Days_Used[YTSData2022$Cigarette_Days_Used=="20"]<-"Current"
+YTSData2022$Cigarette_Days_Used[YTSData2022$Cigarette_Days_Used=="21"]<-"Frequent"
+YTSData2022$Cigarette_Days_Used[YTSData2022$Cigarette_Days_Used=="22"]<-"Frequent"
+YTSData2022$Cigarette_Days_Used[YTSData2022$Cigarette_Days_Used=="23"]<-"Frequent"
+YTSData2022$Cigarette_Days_Used[YTSData2022$Cigarette_Days_Used=="24"]<-"Frequent"
+YTSData2022$Cigarette_Days_Used[YTSData2022$Cigarette_Days_Used=="25"]<-"Frequent"
+YTSData2022$Cigarette_Days_Used[YTSData2022$Cigarette_Days_Used=="26"]<-"Frequent"
+YTSData2022$Cigarette_Days_Used[YTSData2022$Cigarette_Days_Used=="27"]<-"Frequent"
+YTSData2022$Cigarette_Days_Used[YTSData2022$Cigarette_Days_Used=="28"]<-"Frequent"
+YTSData2022$Cigarette_Days_Used[YTSData2022$Cigarette_Days_Used=="29"]<-"Frequent"
+YTSData2022$Cigarette_Days_Used[YTSData2022$Cigarette_Days_Used=="30"]<-"Frequent"
+
+```
+
+``` {r ChangeValuesDaysUsedChewTobac}
+YTSData2022$Chewing_Tobacco_Days_Used <- 
+  as.character(YTSData2022$Chewing_Tobacco_Days_Used)
+
+YTSData2022$Chewing_Tobacco_Days_Used[YTSData2022$Chewing_Tobacco_Days_Used=="0"]<-"Ever"
+YTSData2022$Chewing_Tobacco_Days_Used[YTSData2022$Chewing_Tobacco_Days_Used=="1"]<-"Current"
+YTSData2022$Chewing_Tobacco_Days_Used[YTSData2022$Chewing_Tobacco_Days_Used=="2"]<-"Current"
+YTSData2022$Chewing_Tobacco_Days_Used[YTSData2022$Chewing_Tobacco_Days_Used=="3"]<-"Current"
+YTSData2022$Chewing_Tobacco_Days_Used[YTSData2022$Chewing_Tobacco_Days_Used=="4"]<-"Current"
+YTSData2022$Chewing_Tobacco_Days_Used[YTSData2022$Chewing_Tobacco_Days_Used=="5"]<-"Current"
+YTSData2022$Chewing_Tobacco_Days_Used[YTSData2022$Chewing_Tobacco_Days_Used=="6"]<-"Current"
+YTSData2022$Chewing_Tobacco_Days_Used[YTSData2022$Chewing_Tobacco_Days_Used=="7"]<-"Current"
+YTSData2022$Chewing_Tobacco_Days_Used[YTSData2022$Chewing_Tobacco_Days_Used=="8"]<-"Current"
+YTSData2022$Chewing_Tobacco_Days_Used[YTSData2022$Chewing_Tobacco_Days_Used=="9"]<-"Current"
+YTSData2022$Chewing_Tobacco_Days_Used[YTSData2022$Chewing_Tobacco_Days_Used=="10"]<-"Current"
+YTSData2022$Chewing_Tobacco_Days_Used[YTSData2022$Chewing_Tobacco_Days_Used=="11"]<-"Current"
+YTSData2022$Chewing_Tobacco_Days_Used[YTSData2022$Chewing_Tobacco_Days_Used=="12"]<-"Current"
+YTSData2022$Chewing_Tobacco_Days_Used[YTSData2022$Chewing_Tobacco_Days_Used=="13"]<-"Current"
+YTSData2022$Chewing_Tobacco_Days_Used[YTSData2022$Chewing_Tobacco_Days_Used=="14"]<-"Current"
+YTSData2022$Chewing_Tobacco_Days_Used[YTSData2022$Chewing_Tobacco_Days_Used=="15"]<-"Current"
+YTSData2022$Chewing_Tobacco_Days_Used[YTSData2022$Chewing_Tobacco_Days_Used=="16"]<-"Current"
+YTSData2022$Chewing_Tobacco_Days_Used[YTSData2022$Chewing_Tobacco_Days_Used=="17"]<-"Current"
+YTSData2022$Chewing_Tobacco_Days_Used[YTSData2022$Chewing_Tobacco_Days_Used=="18"]<-"Current"
+YTSData2022$Chewing_Tobacco_Days_Used[YTSData2022$Chewing_Tobacco_Days_Used=="19"]<-"Current"
+YTSData2022$Chewing_Tobacco_Days_Used[YTSData2022$Chewing_Tobacco_Days_Used=="20"]<-"Current"
+YTSData2022$Chewing_Tobacco_Days_Used[YTSData2022$Chewing_Tobacco_Days_Used=="21"]<-"Frequent"
+YTSData2022$Chewing_Tobacco_Days_Used[YTSData2022$Chewing_Tobacco_Days_Used=="22"]<-"Frequent"
+YTSData2022$Chewing_Tobacco_Days_Used[YTSData2022$Chewing_Tobacco_Days_Used=="23"]<-"Frequent"
+YTSData2022$Chewing_Tobacco_Days_Used[YTSData2022$Chewing_Tobacco_Days_Used=="24"]<-"Frequent"
+YTSData2022$Chewing_Tobacco_Days_Used[YTSData2022$Chewing_Tobacco_Days_Used=="25"]<-"Frequent"
+YTSData2022$Chewing_Tobacco_Days_Used[YTSData2022$Chewing_Tobacco_Days_Used=="26"]<-"Frequent"
+YTSData2022$Chewing_Tobacco_Days_Used[YTSData2022$Chewing_Tobacco_Days_Used=="27"]<-"Frequent"
+YTSData2022$Chewing_Tobacco_Days_Used[YTSData2022$Chewing_Tobacco_Days_Used=="28"]<-"Frequent"
+YTSData2022$Chewing_Tobacco_Days_Used[YTSData2022$Chewing_Tobacco_Days_Used=="29"]<-"Frequent"
+YTSData2022$Chewing_Tobacco_Days_Used[YTSData2022$Chewing_Tobacco_Days_Used=="30"]<-"Frequent"
+```
+
+``` {r ChangeValuesDaysUsedSnus}
+YTSData2022$Snus_Days_Used <- 
+  as.character(YTSData2022$Chewing_Tobacco_Days_Used)
+
+YTSData2022$Snus_Days_Used[YTSData2022$Snus_Days_Used=="0"]<-"Ever"
+YTSData2022$Snus_Days_Used[YTSData2022$Snus_Days_Used=="1"]<-"Current"
+YTSData2022$Snus_Days_Used[YTSData2022$Snus_Days_Used=="2"]<-"Current"
+YTSData2022$Snus_Days_Used[YTSData2022$Snus_Days_Used=="3"]<-"Current"
+YTSData2022$Snus_Days_Used[YTSData2022$Snus_Days_Used=="4"]<-"Current"
+YTSData2022$Snus_Days_Used[YTSData2022$Snus_Days_Used=="5"]<-"Current"
+YTSData2022$Snus_Days_Used[YTSData2022$Snus_Days_Used=="6"]<-"Current"
+YTSData2022$Snus_Days_Used[YTSData2022$Snus_Days_Used=="7"]<-"Current"
+YTSData2022$Snus_Days_Used[YTSData2022$Snus_Days_Used=="8"]<-"Current"
+YTSData2022$Snus_Days_Used[YTSData2022$Snus_Days_Used=="9"]<-"Current"
+YTSData2022$Snus_Days_Used[YTSData2022$Snus_Days_Used=="10"]<-"Current"
+YTSData2022$Snus_Days_Used[YTSData2022$Snus_Days_Used=="11"]<-"Current"
+YTSData2022$Snus_Days_Used[YTSData2022$Snus_Days_Used=="12"]<-"Current"
+YTSData2022$Snus_Days_Used[YTSData2022$Snus_Days_Used=="13"]<-"Current"
+YTSData2022$Snus_Days_Used[YTSData2022$Snus_Days_Used=="14"]<-"Current"
+YTSData2022$Snus_Days_Used[YTSData2022$Snus_Days_Used=="15"]<-"Current"
+YTSData2022$Snus_Days_Used[YTSData2022$Snus_Days_Used=="16"]<-"Current"
+YTSData2022$Snus_Days_Used[YTSData2022$Snus_Days_Used=="17"]<-"Current"
+YTSData2022$Snus_Days_Used[YTSData2022$Snus_Days_Used=="18"]<-"Current"
+YTSData2022$Snus_Days_Used[YTSData2022$Snus_Days_Used=="19"]<-"Current"
+YTSData2022$Snus_Days_Used[YTSData2022$Snus_Days_Used=="20"]<-"Current"
+YTSData2022$Snus_Days_Used[YTSData2022$Snus_Days_Used=="21"]<-"Frequent"
+YTSData2022$Snus_Days_Used[YTSData2022$Snus_Days_Used=="22"]<-"Frequent"
+YTSData2022$Snus_Days_Used[YTSData2022$Snus_Days_Used=="23"]<-"Frequent"
+YTSData2022$Snus_Days_Used[YTSData2022$Snus_Days_Used=="24"]<-"Frequent"
+YTSData2022$Snus_Days_Used[YTSData2022$Snus_Days_Used=="25"]<-"Frequent"
+YTSData2022$Snus_Days_Used[YTSData2022$Snus_Days_Used=="26"]<-"Frequent"
+YTSData2022$Snus_Days_Used[YTSData2022$Snus_Days_Used=="27"]<-"Frequent"
+YTSData2022$Snus_Days_Used[YTSData2022$Snus_Days_Used=="28"]<-"Frequent"
+YTSData2022$Snus_Days_Used[YTSData2022$Snus_Days_Used=="29"]<-"Frequent"
+YTSData2022$Snus_Days_Used[YTSData2022$Snus_Days_Used=="30"]<-"Frequent"
+```
+
+```{r ChangeValuesDaysUsedDissolvable}
+YTSData2022$Dissolvable_Days_Used <- 
+  as.character(YTSData2022$Dissolvable_Days_Used)
+
+YTSData2022$Dissolvable_Days_Used[YTSData2022$Dissolvable_Days_Used=="0"]<-"Ever"
+YTSData2022$Dissolvable_Days_Used[YTSData2022$Dissolvable_Days_Used=="1"]<-"Current"
+YTSData2022$Dissolvable_Days_Used[YTSData2022$Dissolvable_Days_Used=="2"]<-"Current"
+YTSData2022$Dissolvable_Days_Used[YTSData2022$Dissolvable_Days_Used=="3"]<-"Current"
+YTSData2022$Dissolvable_Days_Used[YTSData2022$Dissolvable_Days_Used=="4"]<-"Current"
+YTSData2022$Dissolvable_Days_Used[YTSData2022$Dissolvable_Days_Used=="5"]<-"Current"
+YTSData2022$Dissolvable_Days_Used[YTSData2022$Dissolvable_Days_Used=="6"]<-"Current"
+YTSData2022$Dissolvable_Days_Used[YTSData2022$Dissolvable_Days_Used=="7"]<-"Current"
+YTSData2022$Dissolvable_Days_Used[YTSData2022$Dissolvable_Days_Used=="8"]<-"Current"
+YTSData2022$Dissolvable_Days_Used[YTSData2022$Dissolvable_Days_Used=="9"]<-"Current"
+YTSData2022$Dissolvable_Days_Used[YTSData2022$Dissolvable_Days_Used=="10"]<-"Current"
+YTSData2022$Dissolvable_Days_Used[YTSData2022$Dissolvable_Days_Used=="11"]<-"Current"
+YTSData2022$Dissolvable_Days_Used[YTSData2022$Dissolvable_Days_Used=="12"]<-"Current"
+YTSData2022$Dissolvable_Days_Used[YTSData2022$Dissolvable_Days_Used=="13"]<-"Current"
+YTSData2022$Dissolvable_Days_Used[YTSData2022$Dissolvable_Days_Used=="14"]<-"Current"
+YTSData2022$Dissolvable_Days_Used[YTSData2022$Dissolvable_Days_Used=="15"]<-"Current"
+YTSData2022$Dissolvable_Days_Used[YTSData2022$Dissolvable_Days_Used=="16"]<-"Current"
+YTSData2022$Dissolvable_Days_Used[YTSData2022$Dissolvable_Days_Used=="17"]<-"Current"
+YTSData2022$Dissolvable_Days_Used[YTSData2022$Dissolvable_Days_Used=="18"]<-"Current"
+YTSData2022$Dissolvable_Days_Used[YTSData2022$Dissolvable_Days_Used=="19"]<-"Current"
+YTSData2022$Dissolvable_Days_Used[YTSData2022$Dissolvable_Days_Used=="20"]<-"Current"
+YTSData2022$Dissolvable_Days_Used[YTSData2022$Dissolvable_Days_Used=="21"]<-"Frequent"
+YTSData2022$Dissolvable_Days_Used[YTSData2022$Dissolvable_Days_Used=="22"]<-"Frequent"
+YTSData2022$Dissolvable_Days_Used[YTSData2022$Dissolvable_Days_Used=="23"]<-"Frequent"
+YTSData2022$Dissolvable_Days_Used[YTSData2022$Dissolvable_Days_Used=="24"]<-"Frequent"
+YTSData2022$Dissolvable_Days_Used[YTSData2022$Dissolvable_Days_Used=="25"]<-"Frequent"
+YTSData2022$Dissolvable_Days_Used[YTSData2022$Dissolvable_Days_Used=="26"]<-"Frequent"
+YTSData2022$Dissolvable_Days_Used[YTSData2022$Dissolvable_Days_Used=="27"]<-"Frequent"
+YTSData2022$Dissolvable_Days_Used[YTSData2022$Dissolvable_Days_Used=="28"]<-"Frequent"
+YTSData2022$Dissolvable_Days_Used[YTSData2022$Dissolvable_Days_Used=="29"]<-"Frequent"
+YTSData2022$Dissolvable_Days_Used[YTSData2022$Dissolvable_Days_Used=="30"]<-"Frequent"
+```
+
+```{r ChangeValuesDaysUsedZyn}
+YTSData2022$Zyn_Days_Used <- 
+  as.character(YTSData2022$Zyn_Days_Used)
+
+YTSData2022$Zyn_Days_Used[YTSData2022$Zyn_Days_Used=="0"]<-"Ever"
+YTSData2022$Zyn_Days_Used[YTSData2022$Zyn_Days_Used=="1"]<-"Current"
+YTSData2022$Zyn_Days_Used[YTSData2022$Zyn_Days_Used=="2"]<-"Current"
+YTSData2022$Zyn_Days_Used[YTSData2022$Zyn_Days_Used=="3"]<-"Current"
+YTSData2022$Zyn_Days_Used[YTSData2022$Zyn_Days_Used=="4"]<-"Current"
+YTSData2022$Zyn_Days_Used[YTSData2022$Zyn_Days_Used=="5"]<-"Current"
+YTSData2022$Zyn_Days_Used[YTSData2022$Zyn_Days_Used=="6"]<-"Current"
+YTSData2022$Zyn_Days_Used[YTSData2022$Zyn_Days_Used=="7"]<-"Current"
+YTSData2022$Zyn_Days_Used[YTSData2022$Zyn_Days_Used=="8"]<-"Current"
+YTSData2022$Zyn_Days_Used[YTSData2022$Zyn_Days_Used=="9"]<-"Current"
+YTSData2022$Zyn_Days_Used[YTSData2022$Zyn_Days_Used=="10"]<-"Current"
+YTSData2022$Zyn_Days_Used[YTSData2022$Zyn_Days_Used=="11"]<-"Current"
+YTSData2022$Zyn_Days_Used[YTSData2022$Zyn_Days_Used=="12"]<-"Current"
+YTSData2022$Zyn_Days_Used[YTSData2022$Zyn_Days_Used=="13"]<-"Current"
+YTSData2022$Zyn_Days_Used[YTSData2022$Zyn_Days_Used=="14"]<-"Current"
+YTSData2022$Zyn_Days_Used[YTSData2022$Zyn_Days_Used=="15"]<-"Current"
+YTSData2022$Zyn_Days_Used[YTSData2022$Zyn_Days_Used=="16"]<-"Current"
+YTSData2022$Zyn_Days_Used[YTSData2022$Zyn_Days_Used=="17"]<-"Current"
+YTSData2022$Zyn_Days_Used[YTSData2022$Zyn_Days_Used=="18"]<-"Current"
+YTSData2022$Zyn_Days_Used[YTSData2022$Zyn_Days_Used=="19"]<-"Current"
+YTSData2022$Zyn_Days_Used[YTSData2022$Zyn_Days_Used=="20"]<-"Current"
+YTSData2022$Zyn_Days_Used[YTSData2022$Zyn_Days_Used=="21"]<-"Frequent"
+YTSData2022$Zyn_Days_Used[YTSData2022$Zyn_Days_Used=="22"]<-"Frequent"
+YTSData2022$Zyn_Days_Used[YTSData2022$Zyn_Days_Used=="23"]<-"Frequent"
+YTSData2022$Zyn_Days_Used[YTSData2022$Zyn_Days_Used=="24"]<-"Frequent"
+YTSData2022$Zyn_Days_Used[YTSData2022$Zyn_Days_Used=="25"]<-"Frequent"
+YTSData2022$Zyn_Days_Used[YTSData2022$Zyn_Days_Used=="26"]<-"Frequent"
+YTSData2022$Zyn_Days_Used[YTSData2022$Zyn_Days_Used=="27"]<-"Frequent"
+YTSData2022$Zyn_Days_Used[YTSData2022$Zyn_Days_Used=="28"]<-"Frequent"
+YTSData2022$Zyn_Days_Used[YTSData2022$Zyn_Days_Used=="29"]<-"Frequent"
+YTSData2022$Zyn_Days_Used[YTSData2022$Zyn_Days_Used=="30"]<-"Frequent"
+```
+
+```{r LastTimeECigUsed}
+YTSData2022$E_Cig_Last_Used <- 
+  as.character(YTSData2022$E_Cig_Last_Used)
+
+YTSData2022$E_Cig_Last_Used[YTSData2022$E_Cig_Last_Used=="1"]<-"Today"
+YTSData2022$E_Cig_Last_Used[YTSData2022$E_Cig_Last_Used=="2"]<-"Last 7 Days"
+YTSData2022$E_Cig_Last_Used[YTSData2022$E_Cig_Last_Used=="3"]<-"Last Month"
+YTSData2022$E_Cig_Last_Used[YTSData2022$E_Cig_Last_Used=="4"]<-"Last 6 Months"
+YTSData2022$E_Cig_Last_Used[YTSData2022$E_Cig_Last_Used=="5"]<-"Last Year"
+YTSData2022$E_Cig_Last_Used[YTSData2022$E_Cig_Last_Used=="6"]<-"1-4 Years Ago"
+YTSData2022$E_Cig_Last_Used[YTSData2022$E_Cig_Last_Used=="7"]<-"5 Years Ago"
+```
+
+```{r LastTimeCigUsed}
+YTSData2022$Cigarette_Last_Used <- 
+  as.character(YTSData2022$Cigarette_Last_Used)
+
+YTSData2022$Cigarette_Last_Used[YTSData2022$Cigarette_Last_Used=="1"]<-"Today"
+YTSData2022$Cigarette_Last_Used[YTSData2022$Cigarette_Last_Used=="2"]<-"Last 7 Days"
+YTSData2022$Cigarette_Last_Used[YTSData2022$Cigarette_Last_Used=="3"]<-"Last Month"
+YTSData2022$Cigarette_Last_Used[YTSData2022$Cigarette_Last_Used=="4"]<-"Last 6 Months"
+YTSData2022$Cigarette_Last_Used[YTSData2022$Cigarette_Last_Used=="5"]<-"Last Year"
+YTSData2022$Cigarette_Last_Used[YTSData2022$Cigarette_Last_Used=="6"]<-"1-4 Years Ago"
+YTSData2022$Cigarette_Last_Used[YTSData2022$Cigarette_Last_Used=="7"]<-"5 Years Ago"
+```
+
+```{r ECigThinkQuitting}
+YTSData2022$E_Cig_Thinking_Quitting <- 
+  as.character(YTSData2022$E_Cig_Thinking_Quitting)
+
+YTSData2022$E_Cig_Thinking_Quitting[YTSData2022$E_Cig_Thinking_Quitting=="1"]<-"Next 30 Days"
+YTSData2022$E_Cig_Thinking_Quitting[YTSData2022$E_Cig_Thinking_Quitting=="2"]<-"Next 6 Months"
+YTSData2022$E_Cig_Thinking_Quitting[YTSData2022$E_Cig_Thinking_Quitting=="3"]<-"Next 12 Months"
+YTSData2022$E_Cig_Thinking_Quitting[YTSData2022$E_Cig_Thinking_Quitting=="4"]<-"After 12 Months"
+YTSData2022$E_Cig_Thinking_Quitting[YTSData2022$E_Cig_Thinking_Quitting=="5"]<-"No"
+```
+
+```{r CigThinkQuitting}
+YTSData2022$Cigarette_Thinking_Quitting <- 
+  as.character(YTSData2022$Cigarette_Thinking_Quitting)
+
+YTSData2022$Cigarette_Thinking_Quitting[YTSData2022$Cigarette_Thinking_Quitting=="1"]<-"Next 30 Days"
+YTSData2022$Cigarette_Thinking_Quitting[YTSData2022$Cigarette_Thinking_Quitting=="2"]<-"Next 6 Months"
+YTSData2022$Cigarette_Thinking_Quitting[YTSData2022$Cigarette_Thinking_Quitting=="3"]<-"Next 12 Months"
+YTSData2022$Cigarette_Thinking_Quitting[YTSData2022$Cigarette_Thinking_Quitting=="4"]<-"After 12 Months"
+YTSData2022$Cigarette_Thinking_Quitting[YTSData2022$Cigarette_Thinking_Quitting=="5"]<-"No"
+```
+
+```{r ECigQuitAttempts}
+YTSData2022$E_Cig_Quit_Attempts <- 
+  as.character(YTSData2022$E_Cig_Quit_Attempts)
+
+YTSData2022$E_Cig_Quit_Attempts[YTSData2022$E_Cig_Quit_Attempts=="1"]<-"I did not try to quit"
+YTSData2022$E_Cig_Quit_Attempts[YTSData2022$E_Cig_Quit_Attempts=="2"]<-"1"
+YTSData2022$E_Cig_Quit_Attempts[YTSData2022$E_Cig_Quit_Attempts=="3"]<-"2"
+YTSData2022$E_Cig_Quit_Attempts[YTSData2022$E_Cig_Quit_Attempts=="4"]<-"3-5"
+YTSData2022$E_Cig_Quit_Attempts[YTSData2022$E_Cig_Quit_Attempts=="5"]<-"6-9"
+YTSData2022$E_Cig_Quit_Attempts[YTSData2022$E_Cig_Quit_Attempts=="6"]<-"10+"
+```
+
+```{r CigQuitAttempts}
+YTSData2022$Cigarette_Quit_Attempts <- 
+  as.character(YTSData2022$Cigarette_Quit_Attempts)
+
+YTSData2022$Cigarette_Quit_Attempts[YTSData2022$Cigarette_Quit_Attempts=="1"]<-"I did not try to quit"
+YTSData2022$Cigarette_Quit_Attempts[YTSData2022$Cigarette_Quit_Attempts=="2"]<-"1"
+YTSData2022$Cigarette_Quit_Attempts[YTSData2022$Cigarette_Quit_Attempts=="3"]<-"2"
+YTSData2022$Cigarette_Quit_Attempts[YTSData2022$Cigarette_Quit_Attempts=="4"]<-"3-5"
+YTSData2022$Cigarette_Quit_Attempts[YTSData2022$Cigarette_Quit_Attempts=="5"]<-"6-9"
+YTSData2022$Cigarette_Quit_Attempts[YTSData2022$Cigarette_Quit_Attempts=="6"]<-"10+"
+```
+
+```{r ECigCuriousity}
+YTSData2022$E_Cig_Curiousity <- 
+  as.character(YTSData2022$E_Cig_Curiousity)
+
+YTSData2022$E_Cig_Curiousity[YTSData2022$E_Cig_Curiousity=="1"]<-"Definitely Yes"
+YTSData2022$E_Cig_Curiousity[YTSData2022$E_Cig_Curiousity=="2"]<-"Probably Yes"
+YTSData2022$E_Cig_Curiousity[YTSData2022$E_Cig_Curiousity=="3"]<-"Probably No"
+YTSData2022$E_Cig_Curiousity[YTSData2022$E_Cig_Curiousity=="4"]<-"Definitely No"
+```
+
+```{r CigCuriousity}
+YTSData2022$Cigarette_Curiosity <- 
+  as.character(YTSData2022$Cigarette_Curiosity)
+
+YTSData2022$Cigarette_Curiosity[YTSData2022$Cigarette_Curiosity=="1"]<-"Definitely Yes"
+YTSData2022$Cigarette_Curiosity[YTSData2022$Cigarette_Curiosity=="2"]<-"Probably Yes"
+YTSData2022$Cigarette_Curiosity[YTSData2022$Cigarette_Curiosity=="3"]<-"Probably No"
+YTSData2022$Cigarette_Curiosity[YTSData2022$Cigarette_Curiosity=="4"]<-"Definitely No"
+```
+
+```{r ECigTry}
+YTSData2022$E_Cig_Try<- 
+  as.character(YTSData2022$E_Cig_Try)
+
+YTSData2022$E_Cig_Try[YTSData2022$E_Cig_Try=="1"]<-"Definitely Yes"
+YTSData2022$E_Cig_Try[YTSData2022$E_Cig_Try=="2"]<-"Probably Yes"
+YTSData2022$E_Cig_Try[YTSData2022$E_Cig_Try=="3"]<-"Probably No"
+YTSData2022$E_Cig_Try[YTSData2022$E_Cig_Try=="4"]<-"Definitely No"
+```
+
+```{r CigTry}
+YTSData2022$Cigarette_Try<- 
+  as.character(YTSData2022$Cigarette_Try)
+
+YTSData2022$Cigarette_Try[YTSData2022$Cigarette_Try=="1"]<-"Definitely Yes"
+YTSData2022$Cigarette_Try[YTSData2022$Cigarette_Try=="2"]<-"Probably Yes"
+YTSData2022$Cigarette_Try[YTSData2022$Cigarette_Try=="3"]<-"Probably No"
+YTSData2022$Cigarette_Try[YTSData2022$Cigarette_Try=="4"]<-"Definitely No"
+```
+
+```{r CigTry}
+YTSData2022$E_Cig_Try_Next_Year<- 
+  as.character(YTSData2022$E_Cig_Try_Next_Year)
+
+YTSData2022$E_Cig_Try_Next_Year[YTSData2022$E_Cig_Try_Next_Year=="1"]<-"Definitely Yes"
+YTSData2022$E_Cig_Try_Next_Year[YTSData2022$E_Cig_Try_Next_Year=="2"]<-"Probably Yes"
+YTSData2022$E_Cig_Try_Next_Year[YTSData2022$E_Cig_Try_Next_Year=="3"]<-"Probably No"
+YTSData2022$E_Cig_Try_Next_Year[YTSData2022$E_Cig_Try_Next_Year=="4"]<-"Definitely No"
+```
+
+```{r TobaccoCravings}
+YTSData2022$Any_Tobacco_Craving<- 
+  as.character(YTSData2022$Any_Tobacco_Craving)
+
+YTSData2022$Any_Tobacco_Craving[YTSData2022$Any_Tobacco_Craving=="1"]<-"Yes"
+YTSData2022$Any_Tobacco_Craving[YTSData2022$Any_Tobacco_Craving=="2"]<-"No"
+```
+
+```{r HarmfulTobacco}
+YTSData2022$Are_Tobacco_Products_Harmful<- 
+  as.character(YTSData2022$Are_Tobacco_Products_Harmful)
+
+YTSData2022$Are_Tobacco_Products_Harmful[YTSData2022$Are_Tobacco_Products_Harmful=="1"]<-"Strongly Agree"
+YTSData2022$Are_Tobacco_Products_Harmful[YTSData2022$Are_Tobacco_Products_Harmful=="2"]<-"Agree"
+YTSData2022$Are_Tobacco_Products_Harmful[YTSData2022$Are_Tobacco_Products_Harmful=="3"]<-"Disagree"
+YTSData2022$Are_Tobacco_Products_Harmful[YTSData2022$Are_Tobacco_Products_Harmful=="4"]<-"Strongly Disagree"
+```
+
+```{r ECigPromotion}
+YTSData2022$E_Cig_Promotions_Internet<- 
+  as.character(YTSData2022$E_Cig_Promotions_Internet)
+
+YTSData2022$E_Cig_Promotions_Internet[YTSData2022$E_Cig_Promotions_Internet=="1"]<-"I do not use the internet"
+YTSData2022$E_Cig_Promotions_Internet[YTSData2022$E_Cig_Promotions_Internet=="2"]<-"Never"
+YTSData2022$E_Cig_Promotions_Internet[YTSData2022$E_Cig_Promotions_Internet=="3"]<-"Rarely"
+YTSData2022$E_Cig_Promotions_Internet[YTSData2022$E_Cig_Promotions_Internet=="4"]<-"Sometimes"
+YTSData2022$E_Cig_Promotions_Internet[YTSData2022$E_Cig_Promotions_Internet=="5"]<-"Most of the time"
+YTSData2022$E_Cig_Promotions_Internet[YTSData2022$E_Cig_Promotions_Internet=="6"]<-"Always"
+```
+
+```{r TobaccoPromotion}
+YTSData2022$Tobacco_Promotions_Internet<- 
+  as.character(YTSData2022$Tobacco_Promotions_Internet)
+
+YTSData2022$Tobacco_Promotions_Internet[YTSData2022$Tobacco_Promotions_Internet=="1"]<-"I do not use the internet"
+YTSData2022$Tobacco_Promotions_Internet[YTSData2022$Tobacco_Promotions_Internet=="2"]<-"Never"
+YTSData2022$Tobacco_Promotions_Internet[YTSData2022$Tobacco_Promotions_Internet=="3"]<-"Rarely"
+YTSData2022$Tobacco_Promotions_Internet[YTSData2022$Tobacco_Promotions_Internet=="4"]<-"Sometimes"
+YTSData2022$Tobacco_Promotions_Internet[YTSData2022$Tobacco_Promotions_Internet=="5"]<-"Most of the time"
+YTSData2022$Tobacco_Promotions_Internet[YTSData2022$Tobacco_Promotions_Internet=="6"]<-"Always"
+```
+
+```{r move Dataset}
+write.csv(YTSData2022, file = "NYTSData2022.csv")
+```
