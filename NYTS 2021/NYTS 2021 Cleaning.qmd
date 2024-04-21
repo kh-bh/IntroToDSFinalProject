@@ -25,7 +25,7 @@ YTSData2021 <- YTSData2021 %>%
   relocate(Year, .before = 1)
 YTSData2021 <- YTSData2021 %>% rename("Gender" = QN2)
 YTSData2021 <- YTSData2021 %>% rename("Grade_of_Student" = QN3)
-YTSData2021 <- YTSData2021 %>% rename("E_Cig_Ever_used" = QN6)
+YTSData2021 <- YTSData2021 %>% rename("E_Cig_Ever_Used" = QN6)
 YTSData2021 <- YTSData2021 %>% rename("E_Cig_Days_Used" = QN9)
 YTSData2021 <- YTSData2021 %>% rename("E_Cig_Last_Used" = QN10)
 YTSData2021 <- YTSData2021 %>% rename("E_Cig_Curiousity" = QN29)
@@ -33,6 +33,7 @@ YTSData2021 <- YTSData2021 %>% rename("E_Cig_Try" = QN30)
 YTSData2021 <- YTSData2021 %>% rename("E_Cig_Try_Next_Year" = QN31)
 YTSData2021 <- YTSData2021 %>% rename("Cigarette_Ever_Used" = QN35)
 YTSData2021 <- YTSData2021 %>% rename("Cigarette_Days_Used" = QN38)
+YTSData2021 <- YTSData2021 %>% rename("Cigarette_Last_Used" = QN39)
 YTSData2021 <- YTSData2021 %>% rename("Cigarette_Curiosity" = QN47)
 YTSData2021 <- YTSData2021 %>% rename("Cigarette_Try" = QN48)
 YTSData2021 <- YTSData2021 %>% rename("Cigarette_Try_Next_Year" = QN49)
@@ -44,7 +45,7 @@ YTSData2021 <- YTSData2021 %>% rename("E_Cig_Promotions_Internet" = QN128)
 YTSData2021 <- YTSData2021 %>% rename("Tobacco_Promotions_Internet" = QN139)
 
 
-YTSData2021 <- YTSData2021 %>% select("Gender", "Grade_of_Student", "E_Cig_Ever_used", "E_Cig_Days_Used", "E_Cig_Last_Used", "E_Cig_Curiousity", "E_Cig_Try", "E_Cig_Try_Next_Year", "Cigarette_Ever_Used", "Cigarette_Days_Used", "Cigarette_Curiosity", "Cigarette_Try", "Cigarette_Try_Next_Year", "The_Real_Cost", "Any_Tobacco_Craving", "Attempt_Quitting_Tobacco", "Are_Tobacco_Products_Harmful", "E_Cig_Promotions_Internet", "Tobacco_Promotions_Internet")
+YTSData2021 <- YTSData2021 %>% select("Gender", "Grade_of_Student", "E_Cig_Ever_Used", "E_Cig_Days_Used", "E_Cig_Last_Used", "E_Cig_Curiousity", "E_Cig_Try", "E_Cig_Try_Next_Year", "Cigarette_Ever_Used", "Cigarette_Days_Used", "Cigarette_Curiosity", "Cigarette_Try", "Cigarette_Try_Next_Year", "The_Real_Cost", "Any_Tobacco_Craving", "Attempt_Quitting_Tobacco", "Are_Tobacco_Products_Harmful", "E_Cig_Promotions_Internet", "Tobacco_Promotions_Internet")
 ```
 
 ```{r Duplicating and saving new dataset}
@@ -82,11 +83,11 @@ YTSData2021$Grade_of_Student[YTSData2021$Grade_of_Student=="8"]<-"Unplaced"
 
 ```{r Change Value Names Yes/No}
 
-YTSData2021$E_Cig_Ever_used <- 
-  as.character(YTSData2021$E_Cig_Ever_used)
+YTSData2021$E_Cig_Ever_Used <- 
+  as.character(YTSData2021$E_Cig_Ever_Used)
 
-YTSData2021$E_Cig_Ever_used[YTSData2021$E_Cig_Ever_used=="1"]<-"Yes"
-YTSData2021$E_Cig_Ever_used[YTSData2021$E_Cig_Ever_used=="2"]<-"No"
+YTSData2021$E_Cig_Ever_used[YTSData2021$E_Cig_Ever_Used=="1"]<-"Yes"
+YTSData2021$E_Cig_Ever_used[YTSData2021$E_Cig_Ever_Used=="2"]<-"No"
 
 
 YTSData2021$Cigarette_Ever_Used <- 
@@ -121,6 +122,17 @@ YTSData2021$E_Cig_Last_Used[YTSData2021$E_Cig_Last_Used=="4"]<-"Last 6 Months"
 YTSData2021$E_Cig_Last_Used[YTSData2021$E_Cig_Last_Used=="5"]<-"Last Year"
 YTSData2021$E_Cig_Last_Used[YTSData2021$E_Cig_Last_Used=="6"]<-"1-4 Years Ago"
 YTSData2021$E_Cig_Last_Used[YTSData2021$E_Cig_Last_Used=="7"]<-"5 Years Ago"
+
+YTSData2022$Cigarette_Last_Used <- 
+  as.character(YTSData2022$E_Cig_Last_Used)
+
+YTSData2022$Cigarette_Last_Used[YTSData2022$Cigarette_Last_Used=="1"]<-"Today"
+YTSData2022$Cigarette_Last_Used[YTSData2022$Cigarette_Last_Used=="2"]<-"Last 7 Days"
+YTSData2022$Cigarette_Last_Used[YTSData2022$Cigarette_Last_Used=="3"]<-"Last Month"
+YTSData2022$Cigarette_Last_Used[YTSData2022$Cigarette_Last_Used=="4"]<-"Last 6 Months"
+YTSData2022$Cigarette_Last_Used[YTSData2022$Cigarette_Last_Used=="5"]<-"Last Year"
+YTSData2022$Cigarette_Last_Used[YTSData2022$Cigarette_Last_Used=="6"]<-"1-4 Years Ago"
+YTSData2022$Cigarette_Last_Used[YTSData2022$Cigarette_Last_Used=="7"]<-"5 Years Ago"
 ```
 
 ```{r ECigCuriousity}
