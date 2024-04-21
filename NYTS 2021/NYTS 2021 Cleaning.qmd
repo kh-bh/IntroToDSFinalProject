@@ -20,6 +20,9 @@ str(YTSData2021)
 ```
 
 ```{r renamecol}
+YTSData2021 <- YTSData2021 %>%
+  mutate(Year = 2021) %>%
+  relocate(Year, .before = 1)
 YTSData2021 <- YTSData2021 %>% rename("Gender" = QN2)
 YTSData2021 <- YTSData2021 %>% rename("Grade_of_Student" = QN3)
 YTSData2021 <- YTSData2021 %>% rename("E_Cig_Ever_used" = QN6)
