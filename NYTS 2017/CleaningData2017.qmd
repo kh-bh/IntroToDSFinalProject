@@ -23,10 +23,10 @@ write.csv(YTSDataNumbers2017, file = "NYTS2017DataNumbers.csv")
 
 ```{r renamecol}
 YTSData <- YTSData %>% 
-  select("Q2","Q3","Q28","Q30","Q31","Q27","Q35","Q36","Q7","Q11","Q10","Q6","Q15","Q16","Q64","Q51","Q53","Q72","Q78","Q74")
+  select("Q2","Q3","Q28","Q30","Q31","Q23","Q35","Q36","Q7","Q11","Q10","Q6","Q15","Q16","Q64","Q51","Q72","Q78","Q74")
 
 YTSData <- YTSData %>%
-  mutate(Year = 2018) %>%
+  mutate(Year = 2017) %>%
   relocate(Year, .before = 1)
 
 
@@ -37,7 +37,7 @@ YTSData <- YTSData %>%
     "E_Cig_Ever_Used" = Q28,
     "E_Cig_Days_Used" = Q30,
     "E_Cig_Last_Used" = Q31,
-    "E_Cig_Curiousity" = Q27,
+    "E_Cig_Curiousity" = Q23,
     "E_Cig_Try" = Q35,
     "E_Cig_Try_Next_Year" = Q36,
     "Cigarette_Ever_Used" = Q7,
@@ -48,8 +48,7 @@ YTSData <- YTSData %>%
     "Cigarette_Try_Next_Year" = Q16,
     "The_Real_Cost" = Q64,
     "Any_Tobacco_Craving" = Q51,
-    "Attempt_Quitting_Tobacco" = Q53,
-    "Are_Tobacco_Products_Harmful"  = Q72,
+    "Are_Tobacco_Products_Harmful" = Q72,
     "E_Cig_Promotions_Internet" = Q78,
     "Tobacco_Promotions_Internet" = Q74
   )
@@ -231,5 +230,5 @@ YTSData$Tobacco_Promotions_Internet[YTSData$Tobacco_Promotions_Internet == "6"] 
 ```
 
 ```{r Duplicating and saving new dataset}
-write.csv(YTSData, file = "NYTSData2018.csv")
+write.csv(YTSData, file = "NYTSData2017.csv")
 ```
