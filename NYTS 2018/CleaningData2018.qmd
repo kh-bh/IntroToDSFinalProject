@@ -13,7 +13,7 @@ library(readr)
 
 ```{r setup}
 getwd()
-YTSData2018csv <- read_excel('C:/Users/ishik_o/OneDrive/Desktop/r_projects/YTS16_18_21/nyts2018.xlsx')
+YTSData2018csv <- read.csv("nyts2018.csv")
 ```
 
 ```{r Duplicating and saving new dataset}
@@ -26,32 +26,38 @@ YTSData2018 <- YTSData2018csv %>%
   select("Q2","Q3","Q28","Q31","Q25","Q35","Q36","Q7","Q11","Q10","Q6","Q15","Q45","Q64","Q51","Q53","Q72","Q78","Q74")
 
 YTSData2018 <- YTSData2018 %>%
+  mutate(Year = 2018) %>%
+  relocate(Year, .before = 1)
+
+
+YTSData2018 <- YTSData2018 %>%
   rename(
-    Gender <- Q2,
-    Grade_of_Student <- Q3,
-    E_Cig_Ever_Used <- Q28,
-    E_Cig_Days_Used <- Q31,
-    E_Cig_Curiousity <- Q25,
-    E_Cig_Try <- Q35,
-    E_Cig_Try_Next_Year <- Q36,
-    Cigarette_Ever_Used <- Q7,
-    Cigarette_Days_Used <- Q11,
-    Cigarette_Last_Used <- Q10,
-    Cigarette_Curiosity <- Q6,
-    Cigarette_Try <- Q15,
-    Cigarette_Try_Next_Year <- Q45,
-    The_Real_Cost <- Q64,
-    Any_Tobacco_Craving <- Q51,
-    Attempt_Quitting_Tobacco <- Q53,
-    Are_Tobacco_Products_Harmful  <- Q72,
-    E-Cig_Promotions_Internet <- Q78,
-    Tobacco_Promotions_Internet <- Q74
+    "Gender" = Q2,
+    "Grade_of_Student" = Q3,
+    "E_Cig_Ever_Used" = Q28,
+    "E_Cig_Days_Used" = Q31,
+    "E_Cig_Curiousity" = Q25,
+    "E_Cig_Try" = Q35,
+    "E_Cig_Try_Next_Year" = Q36,
+    "Cigarette_Ever_Used" = Q7,
+    "Cigarette_Days_Used" = Q11,
+    "Cigarette_Last_Used" = Q10,
+    "Cigarette_Curiosity" = Q6,
+    "Cigarette_Try" = Q15,
+    "Cigarette_Try_Next_Year" = Q45,
+    "The_Real_Cost" = Q64,
+    "Any_Tobacco_Craving" = Q51,
+    "Attempt_Quitting_Tobacco" = Q53,
+    "Are_Tobacco_Products_Harmful"  = Q72,
+    "E-Cig_Promotions_Internet" = Q78,
+    "Tobacco_Promotions_Internet" = Q74
   )
 ```
 
 ```{r }
 # QN2
 YTSData2018$Gender <- as.character(YTSData2018$Gender)
+
 
 YTSData2018$Gender[YTSData2018$Gender == "1"] <- "M"
 YTSData2018$Gender[YTSData2018$Gender == "2"] <- "F"
