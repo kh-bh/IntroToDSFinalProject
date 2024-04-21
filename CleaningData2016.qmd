@@ -158,4 +158,6 @@ YTSData2016$Tobacco_Promotions_Internet[YTSData2016$Tobacco_Promotions_Internet 
 YTSData2016$Tobacco_Promotions_Internet[YTSData2016$Tobacco_Promotions_Internet == "6"] <- "Always"
 ```
 
-\`\`\`{r move Dataset} write.csv(YTSData2016, file = "NYTSData2016.csv")
+```{r move Dataset}
+write.csv(YTSData2016Clean, file = "NYTSData2016.csv")
+```

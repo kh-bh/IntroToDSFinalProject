@@ -45,153 +45,156 @@ YTSData2017 <- YTSData2017csv %>%
 ```
 
 ```         
+{r Duplicating and saving new dataset}
+YTSData2017Numbers <- YTSData2017
+write.csv(YTSData2016Numbers, file = "NYTS2017DataNumbers.csv")
 ```
 
 ```{r}
 # QN2
-YTSData$Gender <- as.character(YTSData$Gender)
+YTSData2017$Gender <- as.character(YTSData2017$Gender)
 
-YTSData$Gender[YTSData$Gender == "1"] <- "M"
-YTSData$Gender[YTSData$Gender == "2"] <- "F"
+YTSData2017$Gender[YTSData2017$Gender == "1"] <- "M"
+YTSData2017$Gender[YTSData2017$Gender == "2"] <- "F"
 
 # QN3
-YTSData$Grade_of_Student <- as.character(YTSData$Grade_of_Student)
+YTSData2017$Grade_of_Student <- as.character(YTSData2017$Grade_of_Student)
 
-YTSData$Grade_of_Student[YTSData$Grade_of_Student == "1"] <- "6th"
-YTSData$Grade_of_Student[YTSData$Grade_of_Student == "2"] <- "7th"
-YTSData$Grade_of_Student[YTSData$Grade_of_Student == "3"] <- "8th"
-YTSData$Grade_of_Student[YTSData$Grade_of_Student == "4"] <- "9th"
-YTSData$Grade_of_Student[YTSData$Grade_of_Student == "5"] <- "10th"
-YTSData$Grade_of_Student[YTSData$Grade_of_Student == "6"] <- "11th"
-YTSData$Grade_of_Student[YTSData$Grade_of_Student == "7"] <- "12th"
-YTSData$Grade_of_Student[YTSData$Grade_of_Student == "8"] <- "Unplaced"
+YTSData2017$Grade_of_Student[YTSData2017$Grade_of_Student == "1"] <- "6th"
+YTSData2017$Grade_of_Student[YTSData2017$Grade_of_Student == "2"] <- "7th"
+YTSData2017$Grade_of_Student[YTSData2017$Grade_of_Student == "3"] <- "8th"
+YTSData2017$Grade_of_Student[YTSData2017$Grade_of_Student == "4"] <- "9th"
+YTSData2017$Grade_of_Student[YTSData2017$Grade_of_Student == "5"] <- "10th"
+YTSData2017$Grade_of_Student[YTSData2017$Grade_of_Student == "6"] <- "11th"
+YTSData2017$Grade_of_Student[YTSData2017$Grade_of_Student == "7"] <- "12th"
+YTSData2017$Grade_of_Student[YTSData2017$Grade_of_Student == "8"] <- "Unplaced"
 
 # QN28
-YTSData$E_Cig_Ever_Used <- as.character(YTSData$E_Cig_Ever_Used)
+YTSData2017$E_Cig_Ever_Used <- as.character(YTSData2017$E_Cig_Ever_Used)
 
-YTSData$E_Cig_Ever_Used[YTSData$E_Cig_Ever_Used == "1"] <- "Yes"
-YTSData$E_Cig_Ever_Used[YTSData$E_Cig_Ever_Used == "2"] <- "No"
+YTSData2017$E_Cig_Ever_Used[YTSData2017$E_Cig_Ever_Used == "1"] <- "Yes"
+YTSData2017$E_Cig_Ever_Used[YTSData2017$E_Cig_Ever_Used == "2"] <- "No"
 
 # QN31 Maybe change values in future they seem to be good
-YTSData$E_Cig_Days_Used <- as.character(YTSData$E_Cig_Days_Used)
-YTSData$E_Cig_Days_Used[YTSData$E_Cig_Days_Used == "1"] <- "1"
-YTSData$E_Cig_Days_Used[YTSData$E_Cig_Days_Used == "2"] <- "5"
-YTSData$E_Cig_Days_Used[YTSData$E_Cig_Days_Used == "3"] <- "15"
-YTSData$E_Cig_Days_Used[YTSData$E_Cig_Days_Used == "4"] <- "35"
-YTSData$E_Cig_Days_Used[YTSData$E_Cig_Days_Used == "5"] <- "75"
-YTSData$E_Cig_Days_Used[YTSData$E_Cig_Days_Used == "6"] <- "100"
+YTSData2017$E_Cig_Days_Used <- as.character(YTSData2017$E_Cig_Days_Used)
+YTSData2017$E_Cig_Days_Used[YTSData2017$E_Cig_Days_Used == "1"] <- "1"
+YTSData2017$E_Cig_Days_Used[YTSData2017$E_Cig_Days_Used == "2"] <- "5"
+YTSData2017$E_Cig_Days_Used[YTSData2017$E_Cig_Days_Used == "3"] <- "15"
+YTSData2017$E_Cig_Days_Used[YTSData2017$E_Cig_Days_Used == "4"] <- "35"
+YTSData2017$E_Cig_Days_Used[YTSData2017$E_Cig_Days_Used == "5"] <- "75"
+YTSData2017$E_Cig_Days_Used[YTSData2017$E_Cig_Days_Used == "6"] <- "100"
 
 
 # QN37
-YTSData$E_Cig_Last_Used <- as.character(YTSData$E_Cig_Last_Used)
-YTSData$E_Cig_Last_Used[YTSData$E_Cig_Last_Used == "1"] <- "Today"
-YTSData$E_Cig_Last_Used[YTSData$E_Cig_Last_Used == "2"] <- "Last 7 Days"
-YTSData$E_Cig_Last_Used[YTSData$E_Cig_Last_Used == "3"] <- "Last Month"
-YTSData$E_Cig_Last_Used[YTSData$E_Cig_Last_Used == "4"] <- "Last 6 Months"
-YTSData$E_Cig_Last_Used[YTSData$E_Cig_Last_Used == "5"] <- "Last Year"
-YTSData$E_Cig_Last_Used[YTSData$E_Cig_Last_Used == "6"] <- "1-4 Years Ago"
-YTSData$E_Cig_Last_Used[YTSData$E_Cig_Last_Used == "7"] <- "5 Years Ago"
+YTSData2017$E_Cig_Last_Used <- as.character(YTSData2017$E_Cig_Last_Used)
+YTSData2017$E_Cig_Last_Used[YTSData2017$E_Cig_Last_Used == "1"] <- "Today"
+YTSData2017$E_Cig_Last_Used[YTSData2017$E_Cig_Last_Used == "2"] <- "Last 7 Days"
+YTSData2017$E_Cig_Last_Used[YTSData2017$E_Cig_Last_Used == "3"] <- "Last Month"
+YTSData2017$E_Cig_Last_Used[YTSData2017$E_Cig_Last_Used == "4"] <- "Last 6 Months"
+YTSData2017$E_Cig_Last_Used[YTSData2017$E_Cig_Last_Used == "5"] <- "Last Year"
+YTSData2017$E_Cig_Last_Used[YTSData2017$E_Cig_Last_Used == "6"] <- "1-4 Years Ago"
+YTSData2017$E_Cig_Last_Used[YTSData2017$E_Cig_Last_Used == "7"] <- "5 Years Ago"
 
 # QN25
-YTSData$E_Cig_Curiousity <- as.character(YTSData$E_Cig_Curiousity)
+YTSData2017$E_Cig_Curiousity <- as.character(YTSData2017$E_Cig_Curiousity)
 
-YTSData$E_Cig_Curiousity[YTSData$E_Cig_Curiousity == "1"] <- "Yes"
-YTSData$E_Cig_Curiousity[YTSData$E_Cig_Curiousity == "2"] <- "Yes"
-YTSData$E_Cig_Curiousity[YTSData$E_Cig_Curiousity == "3"] <- "No"
-YTSData$E_Cig_Curiousity[YTSData$E_Cig_Curiousity == "4"] <- "No"
+YTSData2017$E_Cig_Curiousity[YTSData2017$E_Cig_Curiousity == "1"] <- "Yes"
+YTSData2017$E_Cig_Curiousity[YTSData2017$E_Cig_Curiousity == "2"] <- "Yes"
+YTSData2017$E_Cig_Curiousity[YTSData2017$E_Cig_Curiousity == "3"] <- "No"
+YTSData2017$E_Cig_Curiousity[YTSData2017$E_Cig_Curiousity == "4"] <- "No"
 
 # # QN35
-YTSData$E_Cig_Try <- as.character(YTSData$E_Cig_Try)
-YTSData$E_Cig_Try[YTSData$E_Cig_Try == "1"] <- "Yes"
-YTSData$E_Cig_Try[YTSData$E_Cig_Try == "2"] <- "Yes"
-YTSData$E_Cig_Try[YTSData$E_Cig_Try == "3"] <- "No"
-YTSData$E_Cig_Try[YTSData$E_Cig_Try == "4"] <- "No"
+YTSData2017$E_Cig_Try <- as.character(YTSData2017$E_Cig_Try)
+YTSData2017$E_Cig_Try[YTSData2017$E_Cig_Try == "1"] <- "Yes"
+YTSData2017$E_Cig_Try[YTSData2017$E_Cig_Try == "2"] <- "Yes"
+YTSData2017$E_Cig_Try[YTSData2017$E_Cig_Try == "3"] <- "No"
+YTSData2017$E_Cig_Try[YTSData2017$E_Cig_Try == "4"] <- "No"
 
 # QN36
-YTSData$E_Cig_Try_Next_Year <- as.character(YTSData$E_Cig_Try_Next_Year)
-YTSData$E_Cig_Try_Next_Year[YTSData$E_Cig_Try_Next_Year == "1"] <- "Yes"
-YTSData$E_Cig_Try_Next_Year[YTSData$E_Cig_Try_Next_Year == "2"] <- "Yes"
-YTSData$E_Cig_Try_Next_Year[YTSData$E_Cig_Try_Next_Year == "3"] <- "No"
-YTSData$E_Cig_Try_Next_Year[YTSData$E_Cig_Try_Next_Year == "4"] <- "No"
+YTSData2017$E_Cig_Try_Next_Year <- as.character(YTSData2017$E_Cig_Try_Next_Year)
+YTSData2017$E_Cig_Try_Next_Year[YTSData2017$E_Cig_Try_Next_Year == "1"] <- "Yes"
+YTSData2017$E_Cig_Try_Next_Year[YTSData2017$E_Cig_Try_Next_Year == "2"] <- "Yes"
+YTSData2017$E_Cig_Try_Next_Year[YTSData2017$E_Cig_Try_Next_Year == "3"] <- "No"
+YTSData2017$E_Cig_Try_Next_Year[YTSData2017$E_Cig_Try_Next_Year == "4"] <- "No"
 
 # QN7
-YTSData$Cigarette_Ever_Used <- as.character(YTSData$Cigarette_Ever_Used)
-YTSData$Cigarette_Ever_Used[YTSData$Cigarette_Ever_Used == "1"] <- "Yes"
-YTSData$Cigarette_Ever_Used[YTSData$Cigarette_Ever_Used == "2"] <- "No"
+YTSData2017$Cigarette_Ever_Used <- as.character(YTSData2017$Cigarette_Ever_Used)
+YTSData2017$Cigarette_Ever_Used[YTSData2017$Cigarette_Ever_Used == "1"] <- "Yes"
+YTSData2017$Cigarette_Ever_Used[YTSData2017$Cigarette_Ever_Used == "2"] <- "No"
 
 # QN11 Valid numbers do not need to change
-YTSData$Cigarette_Days_Used <- as.character(YTSData$Cigarette_Days_Used)
+YTSData2017$Cigarette_Days_Used <- as.character(YTSData2017$Cigarette_Days_Used)
 
 # QN10
-YTSData$Cigarette_Last_Used <- as.character(YTSData$Cigarette_Last_Used)
-YTSData$Cigarette_Last_Used[YTSData$Cigarette_Last_Used == "1"]<-"Today"
-YTSData$Cigarette_Last_Used[YTSData$Cigarette_Last_Used == "2"]<-"Last 7 Days"
-YTSData$Cigarette_Last_Usedd[YTSData$Cigarette_Last_Used == "3"]<-"Last Month"
-YTSData$Cigarette_Last_Used[YTSData$Cigarette_Last_Used == "4"]<-"Last 6 Months"
-YTSData$Cigarette_Last_Used[YTSData$Cigarette_Last_Used == "5"]<-"Last Year"
-YTSData$Cigarette_Last_Used[YTSData$Cigarette_Last_Used == "6"]<-"1-4 Years Ago"
-YTSData$Cigarette_Last_Used[YTSData$Cigarette_Last_Used == "7"]<-"5 Years Ago"
+YTSData2017$Cigarette_Last_Used <- as.character(YTSData2017$Cigarette_Last_Used)
+YTSData2017$Cigarette_Last_Used[YTSData2017$Cigarette_Last_Used == "1"]<-"Today"
+YTSData2017$Cigarette_Last_Used[YTSData2017$Cigarette_Last_Used == "2"]<-"Last 7 Days"
+YTSData2017$Cigarette_Last_Usedd[YTSData2017$Cigarette_Last_Used == "3"]<-"Last Month"
+YTSData2017$Cigarette_Last_Used[YTSData2017$Cigarette_Last_Used == "4"]<-"Last 6 Months"
+YTSData2017$Cigarette_Last_Used[YTSData2017$Cigarette_Last_Used == "5"]<-"Last Year"
+YTSData2017$Cigarette_Last_Used[YTSData2017$Cigarette_Last_Used == "6"]<-"1-4 Years Ago"
+YTSData2017$Cigarette_Last_Used[YTSData2017$Cigarette_Last_Used == "7"]<-"5 Years Ago"
 
 # QN6
-YTSData$Cigarette_Curiosity <- as.character(YTSData$Cigarette_Curiosity)
-YTSData$Cigarette_Curiosity[YTSData$Cigarette_Curiosity == "1"] <- "Yes"
-YTSData$Cigarette_Curiosity[YTSData$Cigarette_Curiosity == "2"] <- "Yes"
-YTSData$Cigarette_Curiosity[YTSData$Cigarette_Curiosity == "3"] <- "No"
-YTSData$Cigarette_Curiosity[YTSData$Cigarette_Curiosity == "4"] <- "No"
+YTSData2017$Cigarette_Curiosity <- as.character(YTSData2017$Cigarette_Curiosity)
+YTSData2017$Cigarette_Curiosity[YTSData2017$Cigarette_Curiosity == "1"] <- "Yes"
+YTSData2017$Cigarette_Curiosity[YTSData2017$Cigarette_Curiosity == "2"] <- "Yes"
+YTSData2017$Cigarette_Curiosity[YTSData2017$Cigarette_Curiosity == "3"] <- "No"
+YTSData2017$Cigarette_Curiosity[YTSData2017$Cigarette_Curiosity == "4"] <- "No"
 
 #QN15
-YTSData$Cigarette_Try <- as.character(YTSData$Cigarette_Try)
-YTSData$Cigarette_Try[YTSData$Cigarette_Try == "1"] <- "Yes"
-YTSData$Cigarette_Try[YTSData$Cigarette_Try == "2"] <- "Yes"
-YTSData$Cigarette_Try[YTSData$Cigarette_Try == "3"] <- "No"
-YTSData$Cigarette_Try[YTSData$Cigarette_Try  == "4"] <- "No"
+YTSData2017$Cigarette_Try <- as.character(YTSData2017$Cigarette_Try)
+YTSData2017$Cigarette_Try[YTSData2017$Cigarette_Try == "1"] <- "Yes"
+YTSData2017$Cigarette_Try[YTSData2017$Cigarette_Try == "2"] <- "Yes"
+YTSData2017$Cigarette_Try[YTSData2017$Cigarette_Try == "3"] <- "No"
+YTSData2017$Cigarette_Try[YTSData2017$Cigarette_Try  == "4"] <- "No"
 
 # QN16
-YTSData$Cigarette_Try_Next_Year <- as.character(YTSData$Cigarette_Try_Next_Year)
-YTSData$Cigarette_Try_Next_Year[YTSData$Cigarette_Try_Next_Year == "1"] <- "Yes"
-YTSData$Cigarette_Try_Next_Year[YTSData$Cigarette_Try_Next_Year == "2"] <- "Yes"
-YTSData$Cigarette_Try_Next_Year[YTSData$Cigarette_Try_Next_Year == "3"] <- "No"
-YTSData$Cigarette_Try_Next_Year[YTSData$Cigarette_Try_Next_Year  == "4"] <- "No"
+YTSData2017$Cigarette_Try_Next_Year <- as.character(YTSData2017$Cigarette_Try_Next_Year)
+YTSData2017$Cigarette_Try_Next_Year[YTSData2017$Cigarette_Try_Next_Year == "1"] <- "Yes"
+YTSData2017$Cigarette_Try_Next_Year[YTSData2017$Cigarette_Try_Next_Year == "2"] <- "Yes"
+YTSData2017$Cigarette_Try_Next_Year[YTSData2017$Cigarette_Try_Next_Year == "3"] <- "No"
+YTSData2017$Cigarette_Try_Next_Year[YTSData2017$Cigarette_Try_Next_Year  == "4"] <- "No"
 
 # QN64
-YTSData$The_Real_Cost <- as.character(YTSData$The_Real_Cost)
-YTSData$The_Real_Cost[YTSData$The_Real_Cost == "1"] <- "Yes"
-YTSData$The_Real_Cost[YTSData$The_Real_Cost == "2"] <- "No"
-YTSData$The_Real_Cost[YTSData$The_Real_Cost == "3"] <- "Not sure"
+YTSData2017$The_Real_Cost <- as.character(YTSData2017$The_Real_Cost)
+YTSData2017$The_Real_Cost[YTSData2017$The_Real_Cost == "1"] <- "Yes"
+YTSData2017$The_Real_Cost[YTSData2017$The_Real_Cost == "2"] <- "No"
+YTSData2017$The_Real_Cost[YTSData2017$The_Real_Cost == "3"] <- "Not sure"
 
 # QN51
-YTSData$Any_Tobacco_Craving <- as.character(YTSData$Any_Tobacco_Craving)
-YTSData$Any_Tobacco_Craving[YTSData$Any_Tobacco_Craving == "1"] <- "Yes"
-YTSData$Any_Tobacco_Craving[YTSData$Any_Tobacco_Craving == "2"] <- "No"
+YTSData2017$Any_Tobacco_Craving <- as.character(YTSData2017$Any_Tobacco_Craving)
+YTSData2017$Any_Tobacco_Craving[YTSData2017$Any_Tobacco_Craving == "1"] <- "Yes"
+YTSData2017$Any_Tobacco_Craving[YTSData2017$Any_Tobacco_Craving == "2"] <- "No"
 
 # QN 72
-YTSData$Are_Tobacco_Products_Harmful <- as.character(YTSData$Are_Tobacco_Products_Harmful)
-YTSData$Are_Tobacco_Products_Harmful[YTSData$Are_Tobacco_Products_Harmful == "1"] <- "Yes"
-YTSData$Are_Tobacco_Products_Harmful[YTSData$Are_Tobacco_Products_Harmful == "2"] <- "Yes"
-YTSData$Are_Tobacco_Products_Harmful[YTSData$Are_Tobacco_Products_Harmful == "3"] <- "No"
-YTSData$Are_Tobacco_Products_Harmful[YTSData$Are_Tobacco_Products_Harmful == "4"] <- "No"
+YTSData2017$Are_Tobacco_Products_Harmful <- as.character(YTSData2017$Are_Tobacco_Products_Harmful)
+YTSData2017$Are_Tobacco_Products_Harmful[YTSData2017$Are_Tobacco_Products_Harmful == "1"] <- "Yes"
+YTSData2017$Are_Tobacco_Products_Harmful[YTSData2017$Are_Tobacco_Products_Harmful == "2"] <- "Yes"
+YTSData2017$Are_Tobacco_Products_Harmful[YTSData2017$Are_Tobacco_Products_Harmful == "3"] <- "No"
+YTSData2017$Are_Tobacco_Products_Harmful[YTSData2017$Are_Tobacco_Products_Harmful == "4"] <- "No"
 
 # QN81
-YTSData$E_Cig_Promotions_Internet <- as.character(YTSData$E_Cig_Promotions_Internet)
-YTSData$E_Cig_Promotions_Internet[YTSData$E_Cig_Promotions_Internet == "1"] <- "I do not use the internet"
-YTSData$E_Cig_Promotions_Internet[YTSData$E_Cig_Promotions_Internet == "2"] <- "Never"
-YTSData$E_Cig_Promotions_Internet[YTSData$E_Cig_Promotions_Internet == "3"] <- "Rarely"
-YTSData$E_Cig_Promotions_Internet[YTSData$E_Cig_Promotions_Internet == "4"] <- "Sometimes"
-YTSData$E_Cig_Promotions_Internet[YTSData$E_Cig_Promotions_Internet == "5"] <- "Most of the time"
-YTSData$E_Cig_Promotions_Internet[YTSData$E_Cig_Promotions_Internet == "6"] <- "Always"
+YTSData2017$E_Cig_Promotions_Internet <- as.character(YTSData2017$E_Cig_Promotions_Internet)
+YTSData2017$E_Cig_Promotions_Internet[YTSData2017$E_Cig_Promotions_Internet == "1"] <- "I do not use the internet"
+YTSData2017$E_Cig_Promotions_Internet[YTSData2017$E_Cig_Promotions_Internet == "2"] <- "Never"
+YTSData2017$E_Cig_Promotions_Internet[YTSData2017$E_Cig_Promotions_Internet == "3"] <- "Rarely"
+YTSData2017$E_Cig_Promotions_Internet[YTSData2017$E_Cig_Promotions_Internet == "4"] <- "Sometimes"
+YTSData2017$E_Cig_Promotions_Internet[YTSData2017$E_Cig_Promotions_Internet == "5"] <- "Most of the time"
+YTSData2017$E_Cig_Promotions_Internet[YTSData2017$E_Cig_Promotions_Internet == "6"] <- "Always"
 
 # QN 74
-YTSData$Tobacco_Promotions_Internet <- as.character(YTSData$Tobacco_Promotions_Internet)
-YTSData$Tobacco_Promotions_Internet[YTSData$Tobacco_Promotions_Internet == "1"] <- "I do not use the internet"
-YTSData$Tobacco_Promotions_Internet[YTSData$Tobacco_Promotions_Internet == "2"] <- "Never"
-YTSData$Tobacco_Promotions_Internet[YTSData$Tobacco_Promotions_Internet == "3"] <- "Rarely"
-YTSData$Tobacco_Promotions_Internet[YTSData$Tobacco_Promotions_Internet == "4"] <- "Sometimes"
-YTSData$Tobacco_Promotions_Internet[YTSData$Tobacco_Promotions_Internet == "5"] <- "Most of the time"
-YTSData$Tobacco_Promotions_Internet[YTSData$Tobacco_Promotions_Internet == "6"] <- "Always"
+YTSData2017$Tobacco_Promotions_Internet <- as.character(YTSData2017$Tobacco_Promotions_Internet)
+YTSData2017$Tobacco_Promotions_Internet[YTSData2017$Tobacco_Promotions_Internet == "1"] <- "I do not use the internet"
+YTSData2017$Tobacco_Promotions_Internet[YTSData2017$Tobacco_Promotions_Internet == "2"] <- "Never"
+YTSData2017$Tobacco_Promotions_Internet[YTSData2017$Tobacco_Promotions_Internet == "3"] <- "Rarely"
+YTSData2017$Tobacco_Promotions_Internet[YTSData2017$Tobacco_Promotions_Internet == "4"] <- "Sometimes"
+YTSData2017$Tobacco_Promotions_Internet[YTSData2017$Tobacco_Promotions_Internet == "5"] <- "Most of the time"
+YTSData2017$Tobacco_Promotions_Internet[YTSData2017$Tobacco_Promotions_Internet == "6"] <- "Always"
 
 ```
 
 ```{r Duplicating and saving new dataset}
 YTSData2017Numbers <- YTSData2017csv
-write.csv(YTSData2016Numbers, file = "NYTS2017DataNumbers.csv")
+write.csv(YTSData2017Numbers, file = "NYTS2017DataNumbers.csv")
 ```
