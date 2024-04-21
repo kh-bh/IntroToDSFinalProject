@@ -20,6 +20,10 @@ YTSData <- read.csv("OG_nyts2019.csv")
 YTSData <- YTSData %>% 
   select("QN2", "QN3", "QN34", "QN36", "QN37", "QN43", "QN44", "QN45", "QN6", "QN9", "QN10", "QN14", "QN15", "QN16", "QN77", "QN90", "QN65", "QN86", "QN93", "QN89")
 
+YTSData <- YTSData %>%
+  mutate(Year = 2019) %>%
+  relocate(Year, .before = 1)
+
 YTSData <- YTSData %>% rename(
   "Gender" = QN2,
   "Grade_of_Student" = QN3,
@@ -145,7 +149,7 @@ YTSData$Cigarette_Last_Used <- trimws(YTSData$Cigarette_Last_Used)
 
 YTSData$Cigarette_Last_Used[YTSData$Cigarette_Last_Used == "1"]<-"Today"
 YTSData$Cigarette_Last_Used[YTSData$Cigarette_Last_Used == "2"]<-"Last 7 Days"
-YTSData$Cigarette_Last_Usedd[YTSData$Cigarette_Last_Used == "3"]<-"Last Month"
+YTSData$Cigarette_Last_Used[YTSData$Cigarette_Last_Used == "3"]<-"Last Month"
 YTSData$Cigarette_Last_Used[YTSData$Cigarette_Last_Used == "4"]<-"Last 6 Months"
 YTSData$Cigarette_Last_Used[YTSData$Cigarette_Last_Used == "5"]<-"Last Year"
 YTSData$Cigarette_Last_Used[YTSData$Cigarette_Last_Used == "6"]<-"1-4 Years Ago"

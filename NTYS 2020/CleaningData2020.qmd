@@ -20,6 +20,10 @@ YTSData <- read.csv("OG_nyts2020.csv")
 YTSData <- YTSData %>% 
   select("QN2", "QN3", "QN6", "QN8", "QN9", "QN17", "QN18", "QN19", "QN22", "QN25", "QN26", "QN31", "QN32", "QN33", "QN82", "QN61", "QN63", "QN93", "QN102", "QN98")
 
+YTSData <- YTSData %>%
+  mutate(Year = 2020) %>%
+  relocate(Year, .before = 1)
+
 YTSData <- YTSData %>% rename(
   "Gender" = QN2,
   "Grade_of_Student" = QN3,
