@@ -45,7 +45,7 @@ YTSData2021 <- YTSData2021 %>% rename("E_Cig_Promotions_Internet" = QN128)
 YTSData2021 <- YTSData2021 %>% rename("Tobacco_Promotions_Internet" = QN139)
 
 
-YTSData2021 <- YTSData2021 %>% select("Gender", "Grade_of_Student", "E_Cig_Ever_Used", "E_Cig_Days_Used", "E_Cig_Last_Used", "E_Cig_Curiousity", "E_Cig_Try", "E_Cig_Try_Next_Year", "Cigarette_Ever_Used", "Cigarette_Days_Used", "Cigarette_Curiosity", "Cigarette_Try", "Cigarette_Try_Next_Year", "The_Real_Cost", "Any_Tobacco_Craving", "Attempt_Quitting_Tobacco", "Are_Tobacco_Products_Harmful", "E_Cig_Promotions_Internet", "Tobacco_Promotions_Internet")
+YTSData2021 <- YTSData2021 %>% select("Year","Gender", "Grade_of_Student", "E_Cig_Ever_Used", "E_Cig_Days_Used", "E_Cig_Last_Used", "E_Cig_Curiousity", "E_Cig_Try", "E_Cig_Try_Next_Year", "Cigarette_Ever_Used", "Cigarette_Days_Used", "Cigarette_Curiosity", "Cigarette_Try", "Cigarette_Try_Next_Year", "The_Real_Cost", "Any_Tobacco_Craving", "Attempt_Quitting_Tobacco", "Are_Tobacco_Products_Harmful", "E_Cig_Promotions_Internet", "Tobacco_Promotions_Internet")
 ```
 
 ```{r Duplicating and saving new dataset}
@@ -86,8 +86,8 @@ YTSData2021$Grade_of_Student[YTSData2021$Grade_of_Student=="8"]<-"Unplaced"
 YTSData2021$E_Cig_Ever_Used <- 
   as.character(YTSData2021$E_Cig_Ever_Used)
 
-YTSData2021$E_Cig_Ever_used[YTSData2021$E_Cig_Ever_Used=="1"]<-"Yes"
-YTSData2021$E_Cig_Ever_used[YTSData2021$E_Cig_Ever_Used=="2"]<-"No"
+YTSData2021$E_Cig_Ever_Used[YTSData2021$E_Cig_Ever_Used=="1"]<-"Yes"
+YTSData2021$E_Cig_Ever_Used[YTSData2021$E_Cig_Ever_Used=="2"]<-"No"
 
 
 YTSData2021$Cigarette_Ever_Used <- 
