@@ -52,7 +52,7 @@ write.csv(YTSDataNumbers, file = "NYTS2020DataNumbers.csv")
 ```{r clean values}
 # QN2
 YTSData$Gender <- as.character(YTSData$Gender)
-YTSData$Gender <- as.character(YTSData$Gender)
+YTSData$Gender <- trimws(YTSData$Gender)
 
 YTSData$Gender[YTSData$Gender == "1"] <- "M"
 YTSData$Gender[YTSData$Gender == "2"] <- "F"
