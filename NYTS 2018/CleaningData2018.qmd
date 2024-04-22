@@ -190,7 +190,7 @@ YTSData$The_Real_Cost <- trimws(YTSData$The_Real_Cost)
 
 YTSData$The_Real_Cost[YTSData$The_Real_Cost == "1"] <- "Yes"
 YTSData$The_Real_Cost[YTSData$The_Real_Cost == "2"] <- "No"
-YTSData$The_Real_Cost[YTSData$The_Real_Cost == "3"] <- "Not sure"
+YTSData$The_Real_Cost[YTSData$The_Real_Cost == "3"] <- "Not Sure"
 
 # QN51
 YTSData$Any_Tobacco_Craving <- as.character(YTSData$Any_Tobacco_Craving)

@@ -46,7 +46,7 @@ YTSData <- YTSData %>%
 
 ```{r Duplicating and saving new dataset}
 YTSDataNumbers2016 <- YTSData
-write.csv(YTSDataNumbers2017, file = "NYTS2016DataNumbers.csv")
+write.csv(YTSDataNumbers2016, file = "NYTS2016DataNumbers.csv")
 ```
 
 ```{r }
