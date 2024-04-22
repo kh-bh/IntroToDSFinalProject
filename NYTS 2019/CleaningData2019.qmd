@@ -50,13 +50,18 @@ YTSData <- YTSData %>% rename(
 
 ```{r Duplicating and saving new dataset}
 YTSDataNumbers <- YTSData
+
+
 write.csv(YTSDataNumbers, file = "NYTS2019DataNumbers.csv")
+
 ```
 
 ```{r clean values}
 # QN2
 YTSData$Gender <- as.character(YTSData$Gender)
 YTSData$Gender <- trimws(YTSData$Gender) # Copy to all of them
+
+YTSData$Gender <- replace(YTSData$Gender, YTSData$Gender %in% "S", NA)
 
 YTSData$Gender[YTSData$Gender == "1"] <- "M"
 YTSData$Gender[YTSData$Gender == "2"] <- "F"
@@ -77,6 +82,8 @@ YTSData$Grade_of_Student[YTSData$Grade_of_Student == "8"] <- "Unplaced"
 # QN34
 YTSData$E_Cig_Ever_Used <- as.character(YTSData$E_Cig_Ever_Used)
 YTSData$E_Cig_Ever_Used <- trimws(YTSData$E_Cig_Ever_Used)
+
+YTSData$E_Cig_Ever_Used <- replace(YTSData$E_Cig_Ever_Used, YTSData$E_Cig_Ever_Used %in% "S", NA)
 
 YTSData$E_Cig_Ever_Used[YTSData$E_Cig_Ever_Used == "1"] <- "Yes"
 YTSData$E_Cig_Ever_Used[YTSData$E_Cig_Ever_Used == "2"] <- "No"
@@ -188,7 +195,7 @@ YTSData$The_Real_Cost <- trimws(YTSData$The_Real_Cost)
 
 YTSData$The_Real_Cost[YTSData$The_Real_Cost == "1"] <- "Yes"
 YTSData$The_Real_Cost[YTSData$The_Real_Cost == "2"] <- "No"
-YTSData$The_Real_Cost[YTSData$The_Real_Cost == "3"] <- "Not sure"
+YTSData$The_Real_Cost[YTSData$The_Real_Cost == "3"] <- "Not Sure"
 
 # QN90
 YTSData$Any_Tobacco_Craving <- as.character(YTSData$Any_Tobacco_Craving)
