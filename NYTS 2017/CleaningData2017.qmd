@@ -16,11 +16,6 @@ getwd()
 YTSData <- read.csv("nyts2017.csv")
 ```
 
-```{r Duplicating and saving new dataset}
-YTSDataNumbers2017 <- YTSData
-write.csv(YTSDataNumbers2017, file = "NYTS2017DataNumbers.csv")
-```
-
 ```{r renamecol}
 YTSData <- YTSData %>% 
   select("Q2","Q3","Q28","Q30","Q31","Q23","Q35","Q36","Q7","Q11","Q10","Q6","Q15","Q16","Q64","Q51","Q72","Q78","Q74")
@@ -52,6 +47,11 @@ YTSData <- YTSData %>%
     "E_Cig_Promotions_Internet" = Q78,
     "Tobacco_Promotions_Internet" = Q74
   )
+```
+
+```{r Duplicating and saving new dataset}
+YTSDataNumbers2017 <- YTSData
+write.csv(YTSDataNumbers2017, file = "NYTS2017DataNumbers.csv")
 ```
 
 ```{r }
